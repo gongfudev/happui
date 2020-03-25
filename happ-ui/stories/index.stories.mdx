@@ -1,0 +1,55 @@
+import { Story, Preview, Meta, Props, html } from '@open-wc/demoing-storybook';
+
+import '../happ-ui.js';
+
+<Meta 
+  title="HappUi"
+  parameters={{
+    component: "happ-ui",
+    options: { selectedPanel: "storybookjs/knobs/panel" }
+  }}
+/>
+
+# HappUi
+
+A component for...
+
+## Features:
+
+- a
+- b
+- ...
+
+## How to use
+
+### Installation
+
+```bash
+yarn add happ-ui
+```
+
+```js
+import 'happ-ui/happ-ui.js';
+```
+
+<Preview withToolbar>
+  <Story name="Simple">
+    {html`
+      <happ-ui></happ-ui>
+    `}
+  </Story>
+</Preview>
+
+## API
+
+<Props of="happ-ui" />
+
+## Variations
+
+###### Custom Title
+
+<Story name="Custom Title">
+  {html`
+    <happ-ui .title=${'Hello World'}></happ-ui>
+  `}
+</Story>
