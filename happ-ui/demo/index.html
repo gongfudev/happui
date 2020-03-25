@@ -1,29 +1,25 @@
 <!doctype html>
 <html lang="en-GB">
+
 <head>
   <meta charset="utf-8">
   <style>
-    body {
-      background: #fafafa;
-    }
+    body { background: #fafafa; }
+    happ-ui { width: 25%; height: 25%; }
   </style>
 </head>
+
 <body>
-  <div id="demo"></div>
+  <div id="demo">
+    <happ-ui title="Color Wheel 1"></happ-ui>
+    <happ-ui title="Color Wheel 2"></happ-ui>
+    <happ-ui title="Color Wheel 3"></happ-ui>
+    <happ-ui title="Color Wheel 4"></happ-ui>
+  </div>
 
   <script type="module">
-    import { html, render } from 'lit-html';
     import '../happ-ui.js';
-
-    const title = 'Hello owc World!';
-    render(
-      html`
-        <happ-ui .title=${title}>
-          some more light-dom
-        </happ-ui>
-      `,
-      document.querySelector('#demo')
-    );
   </script>
+
 </body>
 </html>
