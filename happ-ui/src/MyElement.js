@@ -3,6 +3,14 @@
 import { LitElement, html, customElement, property } from 'lit-element';
 
 export class MyElement extends LitElement {
+  constructor () {
+    super()
+
+    this.foo = "bar-bar"
+    this.mood = "gloomy"
+  }
+
+  //static get properties() { return { mood: String }} // alternative?
 
   // Implement `render` to define a template for your element.
   render(){
@@ -14,7 +22,7 @@ export class MyElement extends LitElement {
      */
     return html`
       <div>
-        <p>A paragraph</p>
+        <p>A paragraph: ${this.foo}  ${this.mood} </p>
       </div>
     `;
   }
