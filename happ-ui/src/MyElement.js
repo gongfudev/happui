@@ -1,6 +1,6 @@
 // https://lit-element.polymer-project.org/guide/templates
 
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, customElement, property } from 'lit-element';
 
 export class MyElement extends LitElement {
 
