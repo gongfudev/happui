@@ -9,10 +9,20 @@ export class MySwitch extends LitElement {
       disabled: { type: Boolean, attribute: true }
     };
   }
+
+  updateChecked(e) {
+    this.checked = e.target.checked;
+    console.log("${this.checked}")
+  }
+
   render() {
     return html`
       <label class="md_switch">
-        <input type="checkbox" />
+      <input
+      @change="${this.updateChecked}"
+      ?checked="${this.checked}"
+      ?disabled="${this.disabled}"
+      type="checkbox" />
         <span class="md_switch__toggle"></span>
         <slot>what</slot>
       </label>
