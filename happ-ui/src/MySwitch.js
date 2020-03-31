@@ -3,7 +3,12 @@
 import { LitElement, html } from 'lit-element';
 
 export class MySwitch extends LitElement {
-
+  static get properties() {
+    return {
+      checked:  { type: Boolean, attribute: true },
+      disabled: { type: Boolean, attribute: true }
+    };
+  }
   render() {
     return html`
       <label class="md_switch">
