@@ -54,6 +54,7 @@ If you customize the configuration a lot, you can consider moving them to indivi
 ## Local Demo with `es-dev-server`
 
 ```bash
-npm start
+npm run watch
 ```
-To run a local development server that serves the basic demo located in `demo/index.html`
+
+To run a local development server that serves the basic demo located in `index.html`
