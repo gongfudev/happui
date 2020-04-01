@@ -7,7 +7,8 @@
   "main": "index.js",
   "module": "index.js",
   "scripts": {
-    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "start": "es-dev-server --app-index index.html --node-resolve --preserve-symlinks",
+    "watch": "es-dev-server --app-index index.html --node-resolve --preserve-symlinks --open --watch",
     "storybook": "start-storybook --node-resolve --watch --open",
     "storybook:build": "build-storybook"
   },
