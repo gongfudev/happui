@@ -5,8 +5,8 @@ WebComponent ‹Sentir—Comprendre—Connaître›, following Enrique Pardo's r
 ## Current status
 
 ```html
-<happ-ui title="First" sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
-<happ-ui title="Second" sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
+<happ-ui title="First"></happ-ui>
+<happ-ui title="Second"></happ-ui>
 ```
 
 ![Two sample ‹happ-ui› web components](docs/happ-ui-components-sample.png)
@@ -54,6 +54,7 @@ If you customize the configuration a lot, you can consider moving them to indivi
 ## Local Demo with `es-dev-server`
 
 ```bash
-npm start
+npm run watch
 ```
-To run a local development server that serves the basic demo located in `demo/index.html`
+
+To run a local development server that serves the basic demo located in `index.html`
