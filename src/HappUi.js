@@ -78,13 +78,13 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <rect x="-10" width="110" height="110" fill="blue"/>
-        <rect x="50" width="60" height="110" fill="yellow"/>
-        <polygon points="50,50, 60,110, 40,110" fill="#0f8"/>
-        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="red"/>
-        <polygon points="0,10, 50,50, 0,30" fill="#f0f"/>
-        <polygon points="100,10, 100,30, 50,50" fill="#f80"/>
+      <g id="background-circle"> <!-- mask="url(#circle)" filter="url(#blur)" -->
+        <rect x="-10" width="110" height="110" fill="${"hsl(240,"+ (1-this._sentir)*100 + "%,50%)"}"/> <!-- blue -->
+        <rect x="50" width="60" height="110" fill="hsl(60,100%,50%)"/> <!-- yellow -->
+        <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,50%)"/> <!-- #0f8 / green -->
+        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,50%)"/> <!-- red -->
+        <polygon points="0,10, 50,50, 0,30" fill="hsl(300,100%,50%)"/> <!-- #f0f / magenta -->
+        <polygon points="100,10, 100,30, 50,50" fill="hsl(30,100%,50%)"/> <!-- #f80 / orange -->
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
