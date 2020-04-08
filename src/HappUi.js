@@ -16,6 +16,10 @@ export class HappUi extends LitElement {
         padding: 25px;
         color: var(--happ-ui-text-color);
       }
+      stem {
+        stroke: #000;
+        stroke-width:3.0
+      }
     `;
   }
 
@@ -33,28 +37,24 @@ export class HappUi extends LitElement {
     
     // Observed properties
     this.title = 'Color Wheel';
-    this.sentir = 75;
-    this.connaitre = 75;
-    this.comprendre = 75;
+    this.sentir = 0.75;
+    this.connaitre = 0.75;
+    this.comprendre = 0.75;
 
     // Private properties
-    this.viewBoxWidth = 100.0;
-    this.viewBoxHeight = 100.0;
-    this.originX = this.viewBoxWidth / 2.0;
-    this.originY = this.viewBoxHeight / 2.0;
     this.radius = 0.5;
     this.width = 0.3;
-    this.maxLength = 90.0;
-    this.minLength = 10.0;
+    this.maxLength = 0.90;
+    this.minLength = 0.10;
     this.pistils = [
-      { id: "p0", angle: 30, length: clamp( this.sentir },
-      { id: "p1", angle: 150, length: this.connaitre },
-      { id: "p2", angle: 270, length: this.comprendre },
+      { id: "p0", angle: 30, length: clamp( this.sentir, this.minLength, this.maxLength) },
+      { id: "p1", angle: 150, length: clamp( this.connaitre, this.minLength, this.maxLength) },
+      { id: "p2", angle: 270, length: clamp( this.comprendre, this.minLength, this.maxLength) },
     ];
   }
 
   render() {
-    return svg`<svg viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}" aria-label="${this.title}">
+    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <defs>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
@@ -75,10 +75,11 @@ export class HappUi extends LitElement {
       <g>
         ${this.pistils.map(
           pistil => svg`
-            <g id="${pistil.id}" transform="rotate(${pistil.angle} ${this.originX} ${this.originY})">
-              <line id="${pistil.id}" x1="${this.originX}" y1="${this.originY}" x2="${this.originX + pistil.length - this.radius}" y2="${this.originY}" style="stroke:rgb(0,0,0);stroke-width:${this.width}" />
-              <circle class="circle" id="${pistil.id}" cx="${this.originX + pistil.length}" cy="${this.originY}" r="${this.radius}" stroke="black" stroke-width="${this.width}" fill-opacity=0.0
+            <g id="${pistil.id}" transform="translate(50.0 50.0) rotate(${pistil.angle} 0 0)">
+              <line id="${pistil.id}" class="stem" x1="0" y1="0" x2="${pistil.length * 50.0}" y2="0" />
+              <circle id="${pistil.id}" cx="${pistil.length * 50.0}" cy="0" r="${this.radius}" stroke="black" stroke-width="${this.width}" fill-opacity=0.0
             />
+          `)}
       </g>
     </svg>`;
   }
