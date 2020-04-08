@@ -67,8 +67,8 @@ export class HappUi extends LitElement {
     return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
-        .stem { stroke: black; stroke-width: 3.0; }
-        .sprout { stroke: black; stroke-width: 3.0; fill-opacity: 0.0; }
+        .stem { stroke: white; stroke-width: 3.0; }
+        .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
       </style>
       <defs>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
@@ -78,11 +78,11 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle"> <!-- mask="url(#circle)" filter="url(#blur)" -->
-        <rect x="-10" width="110" height="110" fill="${"hsl(240,"+ (1-this._sentir)*100 + "%,50%)"}"/> <!-- blue -->
-        <rect x="50" width="60" height="110" fill="hsl(60,100%,50%)"/> <!-- yellow -->
+      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
+        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*55}%)"/> <!-- blue -->
+        <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*55}%)"/> <!-- yellow -->
         <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,50%)"/> <!-- #0f8 / green -->
-        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,50%)"/> <!-- red -->
+        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*55}%)"/> <!-- red -->
         <polygon points="0,10, 50,50, 0,30" fill="hsl(300,100%,50%)"/> <!-- #f0f / magenta -->
         <polygon points="100,10, 100,30, 50,50" fill="hsl(30,100%,50%)"/> <!-- #f80 / orange -->
       </g>
