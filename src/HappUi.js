@@ -16,10 +16,6 @@ export class HappUi extends LitElement {
         padding: 25px;
         color: var(--happ-ui-text-color);
       }
-      stem {
-        stroke: #000;
-        stroke-width:3.0
-      }
     `;
   }
 
@@ -42,20 +38,29 @@ export class HappUi extends LitElement {
     this.comprendre = 0.75;
 
     // Private properties
-    this.radius = 0.5;
-    this.width = 0.3;
-    this.maxLength = 0.90;
-    this.minLength = 0.10;
-    this.pistils = [
-      { id: "p0", angle: 30, length: clamp( this.sentir, this.minLength, this.maxLength) },
-      { id: "p1", angle: 150, length: clamp( this.connaitre, this.minLength, this.maxLength) },
-      { id: "p2", angle: 270, length: clamp( this.comprendre, this.minLength, this.maxLength) },
+    this.__radius = 5.0;
+    this.__width = 3.0;
+    this.__maxLength = 0.90;
+    this.__minLength = 0.10;
+    this.__pistils = [
+      { id: "p0", angle: 30, length: clamp( this.sentir, this.__minLength, this.__maxLength) },
+      { id: "p1", angle: 150, length: clamp( this.connaitre, this.__minLength, this.__maxLength) },
+      { id: "p2", angle: 270, length: clamp( this.comprendre, this.__minLength, this.__maxLength) },
     ];
   }
 
   render() {
     return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
+      <style>
+        .stem {
+          stroke: black;
+          stroke-width: ${this.__width}; }
+        .sprout {
+          stroke: black;
+          stroke-width: ${this.__width};
+          fill-opacity: 0.0; }
+      </style>
       <defs>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
@@ -73,12 +78,11 @@ export class HappUi extends LitElement {
         <polygon points="100,10, 100,30, 50,50" fill="#f80"/>
       </g>
       <g>
-        ${this.pistils.map(
+        ${this.__pistils.map(
           pistil => svg`
             <g id="${pistil.id}" transform="translate(50.0 50.0) rotate(${pistil.angle} 0 0)">
-              <line id="${pistil.id}" class="stem" x1="0" y1="0" x2="${pistil.length * 50.0}" y2="0" />
-              <circle id="${pistil.id}" cx="${pistil.length * 50.0}" cy="0" r="${this.radius}" stroke="black" stroke-width="${this.width}" fill-opacity=0.0
-            />
+              <line id="${pistil.id}" class="stem" x1="0" y1="0" x2="${pistil.length * 50.0 - this.__radius}" y2="0" />
+              <circle id="${pistil.id}" class="sprout" cx="${pistil.length * 50.0}" cy="0" r="${this.__radius}" />
           `)}
       </g>
     </svg>`;
