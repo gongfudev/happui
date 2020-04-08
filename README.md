@@ -5,8 +5,8 @@ WebComponent ‹Sentir—Comprendre—Connaître›, following Enrique Pardo's r
 ## Current status
 
 ```html
-<happ-ui title="First"></happ-ui>
-<happ-ui title="Second"></happ-ui>
+<happ-ui title="First" sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
+<happ-ui title="Second" sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
 ```
 
 ![Two sample ‹happ-ui› web components](docs/happ-ui-components-sample.png)
