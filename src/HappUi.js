@@ -38,23 +38,19 @@ export class HappUi extends LitElement {
     this.comprendre = 0.75;
 
     // Private properties
-    this.__radius = 5.0;
-    this.__width = 3.0;
+    this.__sproutRadius = 5.0;
+    this.__strokeWidth = 3.0;
     this.__maxLength = 0.90;
     this.__minLength = 0.10;
-    this.__pistils = [
-      { id: "p0", angle: 30, length: clamp( this.sentir, this.__minLength, this.__maxLength) },
-      { id: "p1", angle: 150, length: clamp( this.connaitre, this.__minLength, this.__maxLength) },
-      { id: "p2", angle: 270, length: clamp( this.comprendre, this.__minLength, this.__maxLength) },
-    ];
   }
 
   render() {
     return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
-        .stem { stroke: black; stroke-width: ${this.__width}; }
-        .sprout { stroke: black; stroke-width: ${this.__width}; fill-opacity: 0.0; }
+        --happ-ui-stroke-width: 3.0;
+        .stem { stroke: black; stroke-width: var(--happ-ui-stroke-width); }
+        .sprout { stroke: black; stroke-width: var(--happ-ui-stroke-width); fill-opacity: 0.0; }
       </style>
       <defs>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
@@ -74,16 +70,16 @@ export class HappUi extends LitElement {
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
-          <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this.sentir * 47.0 - this.__radius}" y2="0" />
-          <circle id="p0:sprout" class="sprout" cx="${this.sentir * 47.0}" cy="0" r="${this.__radius}" />
+          <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this.sentir * 47.0 - this.__sproutRadius}" y2="0" />
+          <circle id="p0:sprout" class="sprout" cx="${this.sentir * 47.0}" cy="0" r="${this.__sproutRadius}" />
         </g>
         <g id="p1" transform="translate(50 50) rotate(150 0 0)">
-          <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this.connaitre * 47.0 - this.__radius}" y2="0" />
-          <circle id="p1:sprout" class="sprout" cx="${this.connaitre * 47.0}" cy="0" r="${this.__radius}" />
+          <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this.connaitre * 47.0 - this.__sproutRadius}" y2="0" />
+          <circle id="p1:sprout" class="sprout" cx="${this.connaitre * 47.0}" cy="0" r="${this.__sproutRadius}" />
         </g>
         <g id="p2" transform="translate(50 50) rotate(270 0 0)">
-          <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this.comprendre * 47.0 - this.__radius}" y2="0" />
-          <circle id="p2:sprout" class="sprout" cx="${this.comprendre * 47.0}" cy="0" r="${this.__radius}" />
+          <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this.comprendre * 47.0 - this.__sproutRadius}" y2="0" />
+          <circle id="p2:sprout" class="sprout" cx="${this.comprendre * 47.0}" cy="0" r="${this.__sproutRadius}" />
         </g>
       </g>
     </svg>`;
