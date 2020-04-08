@@ -16,18 +16,18 @@ export class HappUi extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      counter: { type: Number },
+      sentir: { type: Number },
+      connaitre: { type: Number },
+      comprendre: { type: Number },
     };
   }
 
   constructor() {
     super();
-    this.title = 'Hey there';
-    this.counter = 5;
-  }
-
-  __increment() {
-    this.counter += 1;
+    this.title = 'Color Wheel';
+    this.sentir = 75;
+    this.connaitre = 75;
+    this.comprendre = 75;
   }
 
   render() {
