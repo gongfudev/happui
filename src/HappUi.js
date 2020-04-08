@@ -33,24 +33,42 @@ export class HappUi extends LitElement {
     
     // Observed properties
     this.title = 'Color Wheel';
-    this.sentir = 0.75;
-    this.connaitre = 0.75;
-    this.comprendre = 0.75;
+    this._sentir = 0.75;
+    this._connaitre = 0.75;
+    this._comprendre = 0.75;
 
     // Private properties
-    this.__sproutRadius = 5.0;
-    this.__strokeWidth = 3.0;
-    this.__maxLength = 0.90;
-    this.__minLength = 0.10;
+    this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
+    this.__min = 0.10; // Minimum value … idem …
+  }
+
+  get sentir() { return this._sentir; }  
+  set sentir( val) {
+    let oldVal = this._sentir;
+    this._sentir = clamp( val, this.__min, this.__max);
+    this.requestUpdate( 'sentir', oldVal);
+  }
+
+  get connaitre() { return this._connaitre; }
+  set connaitre( val) {
+    let oldVal = this._connaitre;
+    this._connaitre = clamp( val, this.__min, this.__max);
+    this.requestUpdate( 'connaitre', oldVal);
+  }
+
+  get comprendre() { return this._comprendre; }
+  set comprendre( val) {
+    let oldVal = this._comprendre;
+    this._comprendre = clamp( val, this.__min, this.__max);
+    this.requestUpdate( 'comprendre', oldVal);
   }
 
   render() {
     return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
-        --happ-ui-stroke-width: 3.0;
-        .stem { stroke: black; stroke-width: var(--happ-ui-stroke-width); }
-        .sprout { stroke: black; stroke-width: var(--happ-ui-stroke-width); fill-opacity: 0.0; }
+        .stem { stroke: black; stroke-width: 3.0; }
+        .sprout { stroke: black; stroke-width: 3.0; fill-opacity: 0.0; }
       </style>
       <defs>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
@@ -70,16 +88,16 @@ export class HappUi extends LitElement {
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
-          <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this.sentir * 47.0 - this.__sproutRadius}" y2="0" />
-          <circle id="p0:sprout" class="sprout" cx="${this.sentir * 47.0}" cy="0" r="${this.__sproutRadius}" />
+          <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
+          <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
         </g>
         <g id="p1" transform="translate(50 50) rotate(150 0 0)">
-          <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this.connaitre * 47.0 - this.__sproutRadius}" y2="0" />
-          <circle id="p1:sprout" class="sprout" cx="${this.connaitre * 47.0}" cy="0" r="${this.__sproutRadius}" />
+          <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
+          <circle id="p1:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
         </g>
         <g id="p2" transform="translate(50 50) rotate(270 0 0)">
-          <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this.comprendre * 47.0 - this.__sproutRadius}" y2="0" />
-          <circle id="p2:sprout" class="sprout" cx="${this.comprendre * 47.0}" cy="0" r="${this.__sproutRadius}" />
+          <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
+          <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
     </svg>`;
