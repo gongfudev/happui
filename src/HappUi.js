@@ -37,6 +37,10 @@ export class HappUi extends LitElement {
     this._connaitre = 0.75;
     this._comprendre = 0.75;
 
+    this._sentir_incr = 0.1;
+    this._connaitre_incr = 0.1;
+    this._comprendre_incr = 0.1;
+
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
@@ -63,8 +67,25 @@ export class HappUi extends LitElement {
     this.requestUpdate( 'comprendre', oldVal);
   }
 
+  _handleClick(evt) {
+    const pistils = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
+    let pistil = pistils[evt.target.id]
+    if (pistil) {
+      this[pistil] += this[`_${pistil}_incr`]
+      if (this[pistil] >= this.__max) {
+        this[pistil] = this.__max 
+        this[`_${pistil}_incr`] *= -1
+      } else if (this[pistil] <= this.__min) {
+        this[pistil] = this.__min 
+        this[`_${pistil}_incr`] *= -1
+      }
+    }
+  }
+
   render() {
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}"
+        @click="${this._handleClick}"
+      >
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
