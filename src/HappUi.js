@@ -83,7 +83,8 @@ export class HappUi extends LitElement {
   }
 
   render() {
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}"
+    return svg`<svg viewBox="0 0 100 100" transform="translate(100,100) scale(3)"
+        aria-label="${this.title}"
         @click="${this._handleClick}"
       >
       <title>${this.title}</title>
