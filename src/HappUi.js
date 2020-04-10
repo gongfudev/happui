@@ -30,7 +30,7 @@ export class HappUi extends LitElement {
 
   constructor() {
     super();
-    
+
     // Observed properties
     this.title = 'Color Wheel';
     this._sentir = 0.75;
@@ -42,7 +42,7 @@ export class HappUi extends LitElement {
     this.__min = 0.10; // Minimum value … idem …
   }
 
-  get sentir() { return this._sentir; }  
+  get sentir() { return this._sentir; }
   set sentir( val) {
     let oldVal = this._sentir;
     this._sentir = clamp( val, this.__min, this.__max);
@@ -64,7 +64,9 @@ export class HappUi extends LitElement {
   }
 
   render() {
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return svg`<svg viewBox="0 0 100 100" transform="translate(100,100) scale(3)"
+        aria-label="${this.title}"
+      >
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
