@@ -1,6 +1,8 @@
 // Import the LitElement base class and html helper function
 import { LitElement, html } from 'lit-element';
 
+import { NestedElement } from './nested-element.js'
+
 class ParentElement extends LitElement {
 
     constructor() {
@@ -18,7 +20,11 @@ class ParentElement extends LitElement {
     }
 }
 
+
 customElements.define('parent-element', ParentElement);
+
+
+/*
 
 class NestedElement extends LitElement {
 
@@ -33,5 +39,5 @@ class NestedElement extends LitElement {
         </div>`;
     }
 }
-
-customElements.define('nested-element', NestedElement);
+*/
+//customElements.define('nested-element', NestedElement);
