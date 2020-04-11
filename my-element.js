@@ -8,11 +8,12 @@ class ParentElement extends LitElement {
     }
 
     render() {
-        return html`<div class="parent">before<slot></slot>after
-        
+        return html`<div class="parent">
+        <p>nested-elements</p>
         <nested-element>nested-in-parent</nested-element>
         <nested-element>nested-in-parent</nested-element>
         <nested-element>nested-in-parent</nested-element>
+        <p>/nested-elements</p>
         </div>`;
     }
 }
@@ -26,8 +27,9 @@ class NestedElement extends LitElement {
     }
 
     render() {
-        return html`<div class="nested">child
+        return html`<div class="nested">nested-element
         <svg height="20" width="20"><circle cx="10" cy="10" r="8" stroke="black" stroke-width="2" fill="green" /> </svg>
+        /nested-element
         </div>`;
     }
 }
