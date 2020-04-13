@@ -12,8 +12,8 @@ export class HappUi extends LitElement {
       :host {
         --happ-ui-text-color: #000;
 
-        display: inline-block;
-        padding: 25px;
+        display: inline;
+        padding: 10px;
         color: var(--happ-ui-text-color);
       }
     `;

@@ -1,7 +1,6 @@
 
 import { LitElement, html, css } from 'lit-element';
 import { HappUi } from '../happ-ui.js'
-import { NestedElement } from '../nested-element.js'
 
 export class HappContactsheet extends LitElement {
  
@@ -10,7 +9,7 @@ static get styles() {
       :host {
         --happ-ui-text-color: #000;
 
-        display: inline-block;
+        display: inline;
         padding: 25px;
         color: var(--happ-ui-text-color);
 
@@ -24,11 +23,6 @@ static get styles() {
     return html`
       <!-- template content -->
       <p>HappContactsheet</p>
-      <svg height="20" width="20">
-        <circle cx="10" cy="10" r="8" stroke="black" stroke-width="2" fill="red" />
-      </svg>
-
-      <nested-element></nested-element>
 
       <div>
       <happ-ui></happ-ui>
