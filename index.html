@@ -27,9 +27,13 @@
              sentir="0.35" comprendre="0.5" connaitre="0.8"></happ-ui>
    
    -->
-    <p>parent-element</p>
+    <p>index nested-element</p>
+    <nested-element> </nested-element>
+    <p>/index nested-element</p>
+
+    <p>index parent-element</p>
     <parent-element> </parent-element>
-    <p>/parent-element</p>
+    <p>/index parent-element</p>
 
     /div
   </div>
@@ -37,9 +41,8 @@
   <script type="module">
     import './happ-ui.js';
     import './happ-contactsheet.js';
-    import './my-element.js'
+    import './parent-element.js'
 
   </script>
-
 </body>
 </html>
