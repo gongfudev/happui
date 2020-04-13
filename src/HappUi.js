@@ -62,9 +62,24 @@ export class HappUi extends LitElement {
     this._comprendre = clamp( val, this.__min, this.__max);
     this.requestUpdate( 'comprendre', oldVal);
   }
+  /*
+  <div class="nested">
+   </div>
 
+    <svg height="20" width="20">
+  */
+
+  render0() {
+    return svg`
+    <svg  width="100" height="100" viewBox="0 0 100 100">
+      <rect width="100%" height="100%" style="fill:rgb(200,200,200);stroke-width:1; stroke:rgb(0,0,0)" />
+      <circle cx="10" cy="10" r="8" stroke="black" stroke-width="2" fill="yellow" /> 
+      </svg>
+   `;
+}
   render() {
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return svg`
+    <svg width="100" height="100" viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -100,6 +115,7 @@ export class HappUi extends LitElement {
           <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>`;
+    </svg>
+    `;
   }
 }

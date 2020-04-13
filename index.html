@@ -13,33 +13,27 @@
 <body>
   <div id="demo"> 
 
-    <p>happ-contactsheet</p>
+    <p>index: happ-ui</p>
+    <happ-ui sentir="0.8" comprendre="0.57" connaitre="0.45"></happ-ui>
+    <p>/index: happ-ui</p>
+
+    <p>index: happ-contactsheet</p>
     <happ-contactsheet></happ-contactsheet>
-    <p>/happ-contactsheet</p>
+    <p>/index: happ-contactsheet</p>
 
-  <!--
-  
-     <happ-ui title="Color Wheel 2"
-             sentir="0.8" comprendre="0.57" connaitre="0.45"></happ-ui>
-    <happ-ui title="Color Wheel 3"
-             sentir="0.6" comprendre="0.5" connaitre="0.6"></happ-ui>
-    <happ-ui title="Color Wheel 4"
-             sentir="0.35" comprendre="0.5" connaitre="0.8"></happ-ui>
-   
-   -->
-    <p>index nested-element</p>
-    <nested-element> </nested-element>
-    <p>/index nested-element</p>
+    <p>index: nested-element</p>
+    <nested-element></nested-element>
+    <p>/index: nested-element</p>
 
-    <p>index parent-element</p>
-    <parent-element> </parent-element>
-    <p>/index parent-element</p>
+    <p>index: parent-element</p>
+    <parent-element></parent-element>
+    <p>/index: parent-element</p>
 
     /div
   </div>
 
   <script type="module">
-    import './happ-ui.js';
+    //import './happ-ui.js';
     import './happ-contactsheet.js';
     import './parent-element.js'
 
