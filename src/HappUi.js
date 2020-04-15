@@ -84,9 +84,9 @@ export class HappUi extends LitElement {
         </mask>
       </defs>
       <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
-        <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
-        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*52}%)"/> <!-- red -->
+        <circle cx="30" cy="50" r="25" fill="hsl(${this._connaitre*359}%,50%,100%)"/>
+        <circle cx="70" cy="50" r="25" fill="hsl(${this._sentir*359}%,50%,100%)"/>
+        <circle cx="50" cy="30" r="25" fill="hsl(${this._comprendre*359}%,50%,100%)"/>
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
