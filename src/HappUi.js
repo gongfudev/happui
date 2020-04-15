@@ -37,6 +37,14 @@ export class HappUi extends LitElement {
     this._connaitre = 0.75;
     this._comprendre = 0.75;
 
+    // Grands blocs de teintes
+    this.teintesNord =     [rgb(), rgb(), rgb(), rgb(), rgb(), rgb(), rgb()];
+    this.teintesEst =  [];
+    this.teintesOuest = [];
+    // 
+    this.teintesSud = [];
+    
+
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
@@ -78,8 +86,8 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
+      <g id="background-circle">
+        <rect x="-10" width="110" height="110" fill="${colorMapper( this._connaitre, teintesSentir)}%)"/> <!-- blue -->
         <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
         <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
         <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*52}%)"/> <!-- red -->
