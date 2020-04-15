@@ -40,11 +40,6 @@ export class HappUi extends LitElement {
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
-    
-    // Grands blocs de couleur
-    this.teintesNord = [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ" ]; // rouge
-    this.teintesEst =  [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ" ]; // jaune
-    this.teintesOuest = [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ"]; //bleu
   }
 
   get sentir() { return this._sentir; }  
@@ -83,10 +78,10 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <circle cx="30" cy="50" r="25" fill="hsl(${this._connaitre*359}%,50%,100%)"/>
-        <circle cx="70" cy="50" r="25" fill="hsl(${this._sentir*359}%,50%,100%)"/>
-        <circle cx="50" cy="30" r="25" fill="hsl(${this._comprendre*359}%,50%,100%)"/>
+      <g id="background-circle" filter="url(#blur)" > <!--  mask="url(#circle)" -->
+        <circle cx="30" cy="50" r="${5+15*this._connaitre}" fill="hsl(${this._connaitre*359},100%,50%)"/>
+        <circle cx="70" cy="50" r="${5+15*this._sentir}" fill="hsl(${this._sentir*359},100%,50%)"/>
+        <circle cx="50" cy="30" r="${5+15*this._comprendre}" fill="hsl(${this._comprendre*359},100%,50%)"/>
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
