@@ -33,14 +33,9 @@ export class HappUi extends LitElement {
     
     // Observed properties
     this.title = 'Color Wheel';
-    this._sentir = 0.75; // cadran N
-    this._connaitre = 0.75; // cadran SE
-    this._comprendre = 0.75; // cadran SO
-    
-    teintesSentir = [rgb(), rgb(), rgb(), rgb(), rgb(), rgb(), rgb()];
-    teintesConnaitre = [rgb(), rgb(), rgb(), rgb(), rgb(), rgb(), rgb()];
-    teintesComprendre = [rgb(), rgb(), rgb(), rgb(), rgb(), rgb(), rgb()];
-
+    this._sentir = 0.75;
+    this._connaitre = 0.75;
+    this._comprendre = 0.75;
 
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
@@ -84,7 +79,12 @@ export class HappUi extends LitElement {
         </mask>
       </defs>
       <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <rect x="-10" width="110" height="110" fill="rgb(${this._sentir*100}%,${this._connaitre*100}%,${this._comprendre*100}%)"/> <!-- blue -->
+        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
+        <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
+        <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
+        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*52}%)"/> <!-- red -->
+        <polygon points="0,10, 50,50, 0,30" fill="hsl(300,100%,${(this._connaitre+this._comprendre)*26}%)"/> <!-- #f0f / magenta -->
+        <polygon points="100,10, 100,30, 50,50" fill="hsl(30,100%,${(this._comprendre+this._sentir)*26}%)"/> <!-- #f80 / orange -->
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
