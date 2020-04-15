@@ -79,7 +79,7 @@ export class HappUi extends LitElement {
         </mask>
       </defs>
       <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <rect x="-10" width="110" height="110" fill="hsl(${this._connaitre*180}%,100%,100)"/> <!-- blue -->
+        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
         <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
         <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
         <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*52}%)"/> <!-- red -->
@@ -89,7 +89,7 @@ export class HappUi extends LitElement {
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
           <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
-          <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="3" />
+          <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
         </g>
         <g id="p1" transform="translate(50 50) rotate(150 0 0)">
           <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
