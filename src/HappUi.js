@@ -40,6 +40,15 @@ export class HappUi extends LitElement {
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
+    
+    // Grands blocs de couleur
+    this.teintesNord = [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ" ]; // rouge
+    this.teintesEst =  [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ" ]; // jaune
+    this.teintesOuest = [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ"]; //bleu
+    // Petits blocs de couleur
+    this.teintesSud = [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ"]; // vert
+    this.teintesNordOuest = [ "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ", "#XXYYZZ"]; // magenta
+    this.teintesNordEst = []; // orange   
   }
 
   get sentir() { return this._sentir; }  
@@ -78,7 +87,7 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
+      <g id="background-circle"> <!-- mask="url(#circle)" filter="url(#blur)" -->
         <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
         <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
         <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
