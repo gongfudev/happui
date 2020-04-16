@@ -13,9 +13,10 @@ static get styles() {
         padding: 10px;
         color: var(--happ-ui-text-color);
 
-        body { background: #fafafa; }
+        background: #315163;
         happ-ui { width: 10%; height: 10%; }
       }
+
       button {
         background-color: #5B2E44;
         border: none;
