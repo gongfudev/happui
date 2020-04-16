@@ -16,6 +16,18 @@ static get styles() {
         body { background: #fafafa; }
         happ-ui { width: 10%; height: 10%; }
       }
+      button {
+        background-color: #5B2E44;
+        border: none;
+        color: white;
+        padding: 0.5em 1em;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        font-family: "Lucida Console", Monaco, monospace;
+        border-radius: 8px;
+      }
     `;
   }
 
@@ -34,6 +46,16 @@ static get styles() {
       };
       return htmlArr;
     }
-    return html`${happui8x5()}`;
+    return html`
+      <div>
+        <button @click=${this._randomize}>randomize</button>
+        <p></p>
+      </div>
+      ${happui8x5()}
+    `;
+  }
+
+  _randomize() {
+    this.requestUpdate();
   }
 }
