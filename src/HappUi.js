@@ -12,8 +12,8 @@ export class HappUi extends LitElement {
       :host {
         --happ-ui-text-color: #000;
 
-        display: inline-block;
-        padding: 25px;
+        display: inline;
+        padding: 10px;
         color: var(--happ-ui-text-color);
       }
     `;
@@ -62,9 +62,16 @@ export class HappUi extends LitElement {
     this._comprendre = clamp( val, this.__min, this.__max);
     this.requestUpdate( 'comprendre', oldVal);
   }
+  /*
+  <div class="nested">
+   </div>
+
+    <svg height="20" width="20">
+  */
 
   render() {
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return svg`
+    <svg width="50" height="50" viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -100,6 +107,7 @@ export class HappUi extends LitElement {
           <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>`;
+    </svg>
+    `;
   }
 }
