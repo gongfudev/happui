@@ -1,8 +1,8 @@
 
 import { LitElement, html, css } from 'lit-element';
-import { HappUi } from '../happ-ui.js'
+import { HappUi } from './HappUi.js'
 
-export class HappContactsheet extends LitElement {
+export class HappSheet extends LitElement {
  
 static get styles() {
   return css`
@@ -60,3 +60,5 @@ static get styles() {
     this.requestUpdate();
   }
 }
+
+window.customElements.define('happ-sheet', HappSheet);
