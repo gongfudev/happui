@@ -111,3 +111,5 @@ export class HappUi extends LitElement {
     `;
   }
 }
+
+window.customElements.define('happ-ui', HappUi);
