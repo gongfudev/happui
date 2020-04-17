@@ -88,33 +88,38 @@ export class HappUiDragme extends LitElement {
     this.requestUpdate( 'comprendre', oldVal);
   }
 
-  _getMousePosition(evt) {
+  _getPosition(evt) {
     let svg = evt.currentTarget
     let CTM = svg.getScreenCTM();
     let pt = svg.createSVGPoint();
-    pt.x = evt.clientX; pt.y = evt.clientY;
+    if (evt.touches) {
+      pt.x = evt.touches[0].clientX; pt.y = evt.touches[0].clientY;
+    } else {
+      pt.x = evt.clientX; pt.y = evt.clientY;
+    }    
     pt = pt.matrixTransform(CTM.inverse());
+    //console.log('_getPosition', evt.target.id, 'svg', svg, 'CTM', CTM, 'pt', pt) 
     return pt
   }
 
-  _mousedown(evt) {
+  _dragStart(evt) {
     let pistil_name = this._pistil_names[evt.target.id]
     if (pistil_name) {
-      //console.log('_mousedown', evt.target.id) 
-      let mousePos = this._getMousePosition(evt)
-      this._offset = mousePos
+      let pos = this._getPosition(evt)
+      this._offset = pos
       this._dragged_pistil_name = pistil_name
+      //console.log('_dragStart', evt.target.id, 'mousePos', pos) 
     }
   }
 
-  _mousemove(evt) {
+  _dragMove(evt) {
     if (this._dragged_pistil_name) {
       let pistil_name = this._dragged_pistil_name
-      //console.log('_mousemove move', evt.target.id) 
-      let mousePos = this._getMousePosition(evt)
-      let displ = displacement(this._offset, mousePos)
+      //console.log('_dragMove', evt.target.id) 
+      let pos = this._getPosition(evt)
+      let displ = displacement(this._offset, pos)
       let proj = projection(displ, this[`_${pistil_name}_angle`])
-      this._offset = mousePos
+      this._offset = pos
       const sprout_length = 47.0
       let new_length = this[pistil_name] + proj / sprout_length
       this[pistil_name] = new_length
@@ -124,23 +129,23 @@ export class HappUiDragme extends LitElement {
     }
   }
 
-  _mouseup(event) {
+  _dragEnd(event) {
     //console.log('_mouseup', event)
-    this._dragged_pistil_name = undefined
-  }
-
-  _mouseleave(event) {
-    //console.log('_mouseleave', event)
     this._dragged_pistil_name = undefined
   }
 
   render() {
     return svg`<svg width="200" height="200" viewBox="0 0 100 100"
         aria-label="${this.title}"
-        @mousedown="${this._mousedown}"
-        @mousemove="${this._mousemove}"
-        @mouseup="${this._mouseup}"
-        @mouseleave="${this._mouseleave}"
+        @mousedown="${this._dragStart}"
+        @mousemove="${this._dragMove}"
+        @mouseup="${this._dragEnd}"
+        @mouseleave="${this._dragEnd}"
+        @touchstart="${this._dragStart}"
+        @touchmove="${this._dragMove}"
+        @touchend="${this._dragEnd}"
+        @touchleave="${this._dragEnd}"
+        @touchcancel="${this._dragEnd}"
       >
       <title>${this.title}</title>
       <style>
