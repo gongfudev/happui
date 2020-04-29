@@ -70,13 +70,13 @@ export class HappUi extends LitElement {
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
 
-        .stop1 { stop-color: #da00ff; stop-opacity: 100%; }
+        .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
         .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
 
-        .stop3 { stop-color: #00a2ff; stop-opacity: 100%; }
+        .stop3 { stop-color: #00a2ff; stop-opacity: 15%; }
         .stop4 { stop-color: #00a500; stop-opacity: 100%; }
 
-        .stop5 { stop-color: #cd0000; stop-opacity: 100%; }
+        .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
         .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
       </style>
       <defs>
@@ -101,16 +101,16 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background" mask="url(#circle)"> <!--  -->
-        <rect x="0" y="0" width="100" height="100" fill="white" stroke="none" />
+      <g id="background" mask="url(#circle)"> <!--  filter="url(#blur)" -->
+        <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
         <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
-          <circle id="backSEN:color" cx="${this._sentir * 47}" cy="0" r="${10+15*this._sentir}" fill="url(#gradientSEN)"/>
+          <circle id="backSEN:color" cx="${this._sentir * 47}" cy="0" r="${20+40*this._sentir}" fill="url(#gradientSEN)"/>
         </g>
         <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
-          <circle id="backCON:color" cx="25" cy="0" r="${25+0*this._comprendre}" fill="url(#gradientCON)"/>
+          <circle id="backCON:color" cx="${this._connaitre * 47}" cy="0" r="${20+40*this._connaitre}" fill="url(#gradientCON)"/>
         </g>
         <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
-          <circle id="backCOM:color" cx="25" cy="0" r="${25+0*this._connaitre}" fill="url(#gradientCOM)"/>
+          <circle id="backCOM:color" cx="${this._comprendre * 47}" cy="0" r="${20+50*this._comprendre}" fill="url(#gradientCOM)"/>
         </g>
       </g>
       <g id="branches">
