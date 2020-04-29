@@ -82,17 +82,17 @@ export class HappUi extends LitElement {
       <defs>
         <linearGradient id="gradientSEN">
           <stop class="stop1" offset="0%"/>
-          <stop class="stop2" offset="65%"/>
+          <stop class="stop2" offset="75%"/>
         </linearGradient>
 
         <linearGradient id="gradientCON">
           <stop class="stop3" offset="0%"/>
-          <stop class="stop4" offset="65%"/>
+          <stop class="stop4" offset="75%"/>
         </linearGradient>
 
         <linearGradient id="gradientCOM">
           <stop class="stop5" offset="0%"/>
-          <stop class="stop6" offset="65%"/>
+          <stop class="stop6" offset="75%"/>
         </linearGradient>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
@@ -105,17 +105,17 @@ export class HappUi extends LitElement {
         <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
         <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
           <circle id="backSEN:color" fill="url(#gradientSEN)"
-            cx="${10 + this._sentir * 50}" cy="0"
+            cx="${30 - this._sentir * 5}" cy="0"
              r="${10 + this._sentir * 50}" />
         </g>
         <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
           <circle id="backCON:color" fill="url(#gradientCON)"
-            cx="${10 + this._connaitre * 50}" cy="0"
+            cx="${30 - this._connaitre * 5}" cy="0"
              r="${10 + this._connaitre * 50}" />
         </g>
         <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
           <circle id="backCOM:color" fill="url(#gradientCOM)"
-            cx="${10 + this._comprendre * 50}" cy="0"
+            cx="${30 - this._comprendre * 5}" cy="0"
              r="${10 + this._comprendre * 50}" />
         </g>
       </g>
