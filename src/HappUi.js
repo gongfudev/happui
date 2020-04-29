@@ -13,7 +13,7 @@ export class HappUi extends LitElement {
         --happ-ui-text-color: #000;
 
         display: inline-block;
-        padding: 25px;
+        padding: 0; margin: 0;
         color: var(--happ-ui-text-color);
       }
     `;
@@ -69,6 +69,7 @@ export class HappUi extends LitElement {
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
+        .frame { stroke: black; stroke-width: 0.5; fill: none; }
 
         .stop1 { stop-color: #da00ff; stop-opacity: 25%; }
         .stop2 { stop-color: #0007d4; stop-opacity: 25%; }
@@ -101,12 +102,11 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" mask="url(#circle)"> <!--   -->
-        <g id="mask-circle"  filter="url(#blur)">
-          <circle id="areaCON" cx="30" cy="50" r="${5+20*this._connaitre}" fill="url(#gradientCON)"/>
-          <circle id="areaSEN" cx="70" cy="50" r="${5+20*this._sentir}" fill="url(#gradientSEN)"/>
-          <circle id="areaCOM" cx="50" cy="30" r="${5+20*this._comprendre}" fill="url(#gradientCOM)"/>
-        </g>
+      <g id="background" mask="url(#circle)" filter="url(#blur)">
+        <rect x="0" y="0" width="100" height="100" fill="white" />
+        <circle id="areaCON" cx="30" cy="50" r="${5+20*this._connaitre}" fill="url(#gradientCON)"/>
+        <circle id="areaSEN" cx="70" cy="50" r="${5+20*this._sentir}" fill="url(#gradientSEN)"/>
+        <circle id="areaCOM" cx="50" cy="30" r="${5+20*this._comprendre}" fill="url(#gradientCOM)"/>
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
