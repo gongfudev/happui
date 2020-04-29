@@ -13,7 +13,7 @@ export class HappUi extends LitElement {
         --happ-ui-text-color: #000;
 
         display: inline-block;
-        padding: 25px;
+        padding: 0; margin: 0;
         color: var(--happ-ui-text-color);
       }
     `;
@@ -63,14 +63,37 @@ export class HappUi extends LitElement {
     this.requestUpdate( 'comprendre', oldVal);
   }
 
-  render() {
+  render() {    
     return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
+
+        .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
+        .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
+
+        .stop3 { stop-color: #00a2ff; stop-opacity: 15%; }
+        .stop4 { stop-color: #00a500; stop-opacity: 100%; }
+
+        .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
+        .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
       </style>
       <defs>
+        <linearGradient id="gradientSEN">
+          <stop class="stop1" offset="0%"/>
+          <stop class="stop2" offset="75%"/>
+        </linearGradient>
+
+        <linearGradient id="gradientCON">
+          <stop class="stop3" offset="0%"/>
+          <stop class="stop4" offset="75%"/>
+        </linearGradient>
+
+        <linearGradient id="gradientCOM">
+          <stop class="stop5" offset="0%"/>
+          <stop class="stop6" offset="75%"/>
+        </linearGradient>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
         </filter>
@@ -78,23 +101,36 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" filter="url(#blur)" > <!--  mask="url(#circle)" -->
-        <circle cx="30" cy="50" r="${5+15*this._connaitre}" fill="hsl(${this._connaitre*359},100%,50%)"/>
-        <circle cx="70" cy="50" r="${5+15*this._sentir}" fill="hsl(${this._sentir*359},100%,50%)"/>
-        <circle cx="50" cy="30" r="${5+15*this._comprendre}" fill="hsl(${this._comprendre*359},100%,50%)"/>
+      <g id="background" mask="url(#circle)" filter="url(#blur)"> <!--   -->
+        <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
+        <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
+          <circle id="backSEN:color" fill="url(#gradientSEN)"
+            cx="${30 - this._sentir * 5}" cy="0"
+             r="${10 + this._sentir * 50}" />
+        </g>
+        <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
+          <circle id="backCON:color" fill="url(#gradientCON)"
+            cx="${30 - this._connaitre * 5}" cy="0"
+             r="${10 + this._connaitre * 50}" />
+        </g>
+        <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
+          <circle id="backCOM:color" fill="url(#gradientCOM)"
+            cx="${30 - this._comprendre * 5}" cy="0"
+             r="${10 + this._comprendre * 50}" />
+        </g>
       </g>
-      <g id="pistils">
-        <g id="p0" transform="translate(50 50) rotate(30 0 0)">
-          <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
-          <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
+      <g id="branches">
+        <g id="branchSEN" transform="translate(50 50) rotate(270 0 0)">
+          <line id="branchSEN:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
+          <circle id="branchSEN:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
         </g>
-        <g id="p1" transform="translate(50 50) rotate(150 0 0)">
-          <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
-          <circle id="p1:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
+        <g id="branchCON" transform="translate(50 50) rotate(30 0 0)">
+          <line id="branchCON:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
+          <circle id="branchCON:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
         </g>
-        <g id="p2" transform="translate(50 50) rotate(270 0 0)">
-          <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
-          <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
+        <g id="branchCOM" transform="translate(50 50) rotate(150 0 0)">
+          <line id="branchCOM:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
+          <circle id="branchCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
     </svg>`;
