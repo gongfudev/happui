@@ -12,8 +12,8 @@ export class HappUi extends LitElement {
       :host {
         --happ-ui-text-color: #000;
 
-        display: inline;
-        padding: 10px;
+        display: inline-block;
+        padding: 25px;
         color: var(--happ-ui-text-color);
       }
     `;
@@ -36,6 +36,10 @@ export class HappUi extends LitElement {
     this._sentir = 0.75;
     this._connaitre = 0.75;
     this._comprendre = 0.75;
+
+    this._sentir_incr = 0.1;
+    this._connaitre_incr = 0.1;
+    this._comprendre_incr = 0.1;
 
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
@@ -62,16 +66,27 @@ export class HappUi extends LitElement {
     this._comprendre = clamp( val, this.__min, this.__max);
     this.requestUpdate( 'comprendre', oldVal);
   }
-  /*
-  <div class="nested">
-   </div>
 
-    <svg height="20" width="20">
-  */
+  _handleClick(evt) {
+    const pistils = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
+    let pistil = pistils[evt.target.id]
+    if (pistil) {
+      this[pistil] += this[`_${pistil}_incr`]
+      if (this[pistil] >= this.__max) {
+        this[pistil] = this.__max 
+        this[`_${pistil}_incr`] *= -1
+      } else if (this[pistil] <= this.__min) {
+        this[pistil] = this.__min 
+        this[`_${pistil}_incr`] *= -1
+      }
+    }
+  }
 
   render() {
-    return svg`
-    <svg width="50" height="50" viewBox="0 0 100 100" aria-label="${this.title}">
+    return svg`<svg viewBox="0 0 100 100""
+        aria-label="${this.title}"
+        @click="${this._handleClick}"
+      >
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -107,7 +122,6 @@ export class HappUi extends LitElement {
           <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>
-    `;
+    </svg>`;
   }
 }
