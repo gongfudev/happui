@@ -8,10 +8,15 @@ requirements and concept (described at https://happui.org/app/).
 ## Current status
 
 ```html
-    <happ-contactsheet></happ-contactsheet>
+<happ-ui title="Color Wheel 1"
+         sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui>
+<happ-ui title="Color Wheel 2"
+         sentir="0.8" comprendre="0.57" connaitre="0.45"></happ-ui>
 ```
 
-## Our \<happ-contactsheet> Web Component
+![Two sample ‹happ-ui› web components](docs/happ-ui-components-sample.png)
+
+## Our \<happ-ui> Web Component
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
@@ -24,12 +29,12 @@ npm i happ-ui
 ## Usage
 
 ```html
-  <script type="module">
-    import './happ-contactsheet.js';
-  </script>
+<script type="module">
+  import 'happ-ui/happ-ui.js';
+</script>
 
-  <happ-contactsheet></happ-contactsheet>
-
+<happ-ui title="Color Wheel"
+         sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui>
 ```
 
 ## Demoing with Storybook
