@@ -12,8 +12,8 @@ export class HappUi extends LitElement {
       :host {
         --happ-ui-text-color: #000;
 
-        display: inline-block;
-        padding: 25px;
+        display: inline;
+        padding: 10px;
         color: var(--happ-ui-text-color);
       }
     `;
@@ -62,9 +62,16 @@ export class HappUi extends LitElement {
     this._comprendre = clamp( val, this.__min, this.__max);
     this.requestUpdate( 'comprendre', oldVal);
   }
+  /*
+  <div class="nested">
+   </div>
+
+    <svg height="20" width="20">
+  */
 
   render() {
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return svg`
+    <svg width="50" height="50" viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -78,10 +85,13 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" filter="url(#blur)" > <!--  mask="url(#circle)" -->
-        <circle cx="30" cy="50" r="${5+15*this._connaitre}" fill="hsl(${this._connaitre*359},100%,50%)"/>
-        <circle cx="70" cy="50" r="${5+15*this._sentir}" fill="hsl(${this._sentir*359},100%,50%)"/>
-        <circle cx="50" cy="30" r="${5+15*this._comprendre}" fill="hsl(${this._comprendre*359},100%,50%)"/>
+      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
+        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
+        <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
+        <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
+        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*52}%)"/> <!-- red -->
+        <polygon points="0,10, 50,50, 0,30" fill="hsl(300,100%,${(this._connaitre+this._comprendre)*26}%)"/> <!-- #f0f / magenta -->
+        <polygon points="100,10, 100,30, 50,50" fill="hsl(30,100%,${(this._comprendre+this._sentir)*26}%)"/> <!-- #f80 / orange -->
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">
@@ -97,6 +107,7 @@ export class HappUi extends LitElement {
           <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>`;
+    </svg>
+    `;
   }
 }
