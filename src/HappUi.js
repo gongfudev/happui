@@ -101,24 +101,30 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background"  > <!-- filter="url(#blur)" -->
-      </g>
-      <g id="pistils" mask="url(#circle)">
+      <g id="background" mask="url(#circle)"> <!--  -->
         <rect x="0" y="0" width="100" height="100" fill="white" stroke="none" />
-        <g id="bSEN" transform="translate(50 50) rotate(30 0 0)">
-          <circle id="bSEN:area" cx="0" cy="50" r="${25+50*this._sentir}" fill="url(#gradientSEN)"/>
-          <line id="bSEN:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
-          <circle id="bSEN:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
+        <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
+          <circle id="backSEN:color" cx="${this._sentir * 47}" cy="0" r="${10+15*this._sentir}" fill="url(#gradientSEN)"/>
         </g>
-        <g id="bCON" transform="translate(50 50) rotate(150 0 0)">
-          <circle id="bCON:area" cx="0" cy="50" r="${10+25*this._comprendre}" fill="url(#gradientCON)"/>
-          <line id="bCON:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
-          <circle id="bCON:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
+        <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
+          <circle id="backCON:color" cx="25" cy="0" r="${25+0*this._comprendre}" fill="url(#gradientCON)"/>
         </g>
-        <g id="bCOM" transform="translate(50 50) rotate(270 0 0)">
-          <circle id="bCOM:area" cx="0" cy="50" r="${10+25*this._connaitre}" fill="url(#gradientCOM)"/>
-          <line id="bCOM:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
-          <circle id="bCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
+        <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
+          <circle id="backCOM:color" cx="25" cy="0" r="${25+0*this._connaitre}" fill="url(#gradientCOM)"/>
+        </g>
+      </g>
+      <g id="branches">
+        <g id="branchSEN" transform="translate(50 50) rotate(270 0 0)">
+          <line id="branchSEN:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
+          <circle id="branchSEN:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
+        </g>
+        <g id="branchCON" transform="translate(50 50) rotate(30 0 0)">
+          <line id="branchCON:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
+          <circle id="branchCON:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
+        </g>
+        <g id="branchCOM" transform="translate(50 50) rotate(150 0 0)">
+          <line id="branchCOM:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
+          <circle id="branchCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
     </svg>`;
