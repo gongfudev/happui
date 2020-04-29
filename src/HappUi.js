@@ -1,21 +1,5 @@
 import { html, svg, css, LitElement } from 'lit-element';
 
-// from http://www.petercollingridge.co.uk/tutorials/svg/interactive/dragging/
-// and https://github.com/petercollingridge/code-for-blog/blob/36ba73c7b763022731a72813249cdc56e7dba8c0/svg-interaction/draggable/draggable_groups.svg?short_path=be4270d
-
-function toRadians(degrees) {
-  return degrees * Math.PI / 180
-}
-
-function displacement(pt1, pt2) {
-  return {x: pt2.x - pt1.x, y: pt2.y - pt1.y}
-}
-
-function projection(pt, angledeg) {
-  let a = toRadians(angledeg)
-  return pt.x * Math.cos(a) + pt.y * Math.sin(a)
-}          
-
 // Utility functions
 function clamp( val, min, max) {
   return val <= min ? min : val >= max ? max : val;
@@ -56,12 +40,6 @@ export class HappUi extends LitElement {
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
-
-    this._sentir_angle = 30
-    this._connaitre_angle = 150
-    this._comprendre_angle = 270
-
-    this.pistil_names = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
   }
 
   get sentir() { return this._sentir; }  
@@ -85,60 +63,8 @@ export class HappUi extends LitElement {
     this.requestUpdate( 'comprendre', oldVal);
   }
 
-  _getMousePosition(evt) {
-    let svg = evt.currentTarget
-    let CTM = svg.getScreenCTM();
-    let pt = svg.createSVGPoint();
-    pt.x = evt.clientX; pt.y = evt.clientY;
-    pt = pt.matrixTransform(CTM.inverse());
-    return pt
-  }
-
-  _mousedown(evt) {
-    let pistil_name = this.pistil_names[evt.target.id]
-    if (pistil_name) {
-      //console.log('_mousedown startDrag event', evt.target.id) 
-      let mousePos = this._getMousePosition(evt)
-      this.offset = mousePos
-      this.isDragging = true
-    }
-  }
-
-  _mousemove(evt) {
-    if (! this.isDragging) {
-      return
-    }
-    let pistil_name = this.pistil_names[evt.target.id]
-    if (pistil_name) {
-      //console.log('_mousemove drag event', evt.target.id) 
-      let mousePos = this._getMousePosition(evt)
-      let displ = displacement(this.offset, mousePos)
-      let proj = projection(displ, this[`_${pistil_name}_angle`])
-      this.offset = mousePos
-      const sprout_length = 47.0
-      this[pistil_name] += proj / sprout_length
-    }
-  }
-
-  _mouseup(event) {
-    // console.log('_mouseup endDrag', event)
-    this.isDragging = false
-  }
-
-  _mouseleave(event) {
-    // console.log('_mouseleave endDrag', event)
-    this.isDragging = false
-  }
-
   render() {
-    return svg`<svg viewBox="0 0 100 100"
-        aria-label="${this.title}"
-        @click="${this._handleClick}"
-        @mousedown="${this._mousedown}"
-        @mousemove="${this._mousemove}"
-        @mouseup="${this._mouseup}"
-        @mouseleave_="${this._mouseleave}"
-      >
+    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -152,13 +78,10 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
-        <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
-        <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
-        <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
-        <polygon points="0,0, 100,0, 100,20, 50,50, 0,20" fill="hsl(0,100%,${this._comprendre*52}%)"/> <!-- red -->
-        <polygon points="0,10, 50,50, 0,30" fill="hsl(300,100%,${(this._connaitre+this._comprendre)*26}%)"/> <!-- #f0f / magenta -->
-        <polygon points="100,10, 100,30, 50,50" fill="hsl(30,100%,${(this._comprendre+this._sentir)*26}%)"/> <!-- #f80 / orange -->
+      <g id="background-circle" filter="url(#blur)" > <!--  mask="url(#circle)" -->
+        <circle cx="30" cy="50" r="${5+15*this._connaitre}" fill="hsl(${this._connaitre*359},100%,50%)"/>
+        <circle cx="70" cy="50" r="${5+15*this._sentir}" fill="hsl(${this._sentir*359},100%,50%)"/>
+        <circle cx="50" cy="30" r="${5+15*this._comprendre}" fill="hsl(${this._comprendre*359},100%,50%)"/>
       </g>
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(30 0 0)">

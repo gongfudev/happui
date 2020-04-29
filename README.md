@@ -8,8 +8,10 @@ requirements and concept (described at https://happui.org/app/).
 ## Current status
 
 ```html
-<happ-ui title="First" sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
-<happ-ui title="Second" sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
+<happ-ui title="Color Wheel 1"
+         sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui>
+<happ-ui title="Color Wheel 2"
+         sentir="0.8" comprendre="0.57" connaitre="0.45"></happ-ui>
 ```
 
 ![Two sample ‹happ-ui› web components](docs/happ-ui-components-sample.png)
@@ -59,6 +61,7 @@ If you customize the configuration a lot, you can consider moving them to indivi
 ## Local Demo with `es-dev-server`
 
 ```bash
-npm start
+npm run watch
 ```
-To run a local development server that serves the basic demo located in `demo/index.html`
+
+To run a local development server that serves the basic demo located in `index.html`.
