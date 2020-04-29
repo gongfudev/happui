@@ -82,17 +82,17 @@ export class HappUi extends LitElement {
       <defs>
         <linearGradient id="gradientSEN">
           <stop class="stop1" offset="0%"/>
-          <stop class="stop2" offset="100%"/>
+          <stop class="stop2" offset="65%"/>
         </linearGradient>
 
         <linearGradient id="gradientCON">
           <stop class="stop3" offset="0%"/>
-          <stop class="stop4" offset="100%"/>
+          <stop class="stop4" offset="65%"/>
         </linearGradient>
 
         <linearGradient id="gradientCOM">
           <stop class="stop5" offset="0%"/>
-          <stop class="stop6" offset="100%"/>
+          <stop class="stop6" offset="65%"/>
         </linearGradient>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
@@ -101,16 +101,22 @@ export class HappUi extends LitElement {
           <circle cx="50" cy="50" r="50" fill="white"/>
         </mask>
       </defs>
-      <g id="background" mask="url(#circle)"> <!--  filter="url(#blur)" -->
+      <g id="background" mask="url(#circle)" filter="url(#blur)"> <!--   -->
         <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
         <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
-          <circle id="backSEN:color" cx="${this._sentir * 47}" cy="0" r="${20+40*this._sentir}" fill="url(#gradientSEN)"/>
+          <circle id="backSEN:color" fill="url(#gradientSEN)"
+            cx="${10 + this._sentir * 50}" cy="0"
+             r="${10 + this._sentir * 50}" />
         </g>
         <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
-          <circle id="backCON:color" cx="${this._connaitre * 47}" cy="0" r="${20+40*this._connaitre}" fill="url(#gradientCON)"/>
+          <circle id="backCON:color" fill="url(#gradientCON)"
+            cx="${10 + this._connaitre * 50}" cy="0"
+             r="${10 + this._connaitre * 50}" />
         </g>
         <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
-          <circle id="backCOM:color" cx="${this._comprendre * 47}" cy="0" r="${20+50*this._comprendre}" fill="url(#gradientCOM)"/>
+          <circle id="backCOM:color" fill="url(#gradientCOM)"
+            cx="${10 + this._comprendre * 50}" cy="0"
+             r="${10 + this._comprendre * 50}" />
         </g>
       </g>
       <g id="branches">
