@@ -6,6 +6,7 @@
   <style>
     body { background: #fafafa; }
     happ-ui { width: 50%; height: 50%; }
+    happui-slider { width: 17%; }
   </style>
 </head>
 
@@ -17,8 +18,8 @@
       <happui-slider id='slider0' value='0.75'>sentir</happui-slider>
       <happui-slider id='slider1' value='0.55'>comprendre</happui-slider>
       <happui-slider id='slider2' value='0.35'>connaitre</happui-slider>
- 
     </div>
+
     <p id='para1'>...</p>
     <script>
       const para1 = document.getElementById('para1');
@@ -30,7 +31,7 @@
       slider1.addEventListener('event-slider', (e) => {para1.innerHTML=`slider1 ${e.detail}`; wheel0.setAttribute('comprendre', e.detail)});
       slider2.addEventListener('event-slider', (e) => {para1.innerHTML=`slider2 ${e.detail}`; wheel0.setAttribute('connaitre', e.detail)});
     </script>
-         
+
   </div>
   <div id="demo">
     <happ-ui title="Color Wheel 1"

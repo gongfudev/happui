@@ -52,6 +52,18 @@ function clamp( val, min, max) {
   }
 
   class HappuiSlider extends LitElement {
+    static get styles() {
+      return css`
+        :host {
+          --happ-ui-text-color: #000;
+
+          display: inline-block;
+          padding: 0; margin: 0;
+          color: var(--happ-ui-text-color);
+        }
+      `;
+    }
+
     static get properties() {
       return {
         value: { type: Number },
@@ -113,7 +125,7 @@ function clamp( val, min, max) {
     }
 
     render() {
-      return svg`<svg width='120' height='40' viewBox='0 0 120 20'
+      return svg`<svg width='100%' viewBox='0 0 120 30'
         @mousedown="${this._dragStart}"
         @mousemove="${this._dragMove}"
         @mouseup="${this._dragEnd}"
