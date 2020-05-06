@@ -7,12 +7,10 @@ export class Slider extends LitElement {
       :host {
         --happ-ui-text-color: #000;
 
-        display: inline-block;
-        padding: 0; margin: 0;
-        color: var(--happ-ui-text-color);
+        display: inline-block; padding: 0; margin: 0;
+        color: var(--happ-ui-text-color); }
 
-        input#repr { width: 50px }
-      }
+      input.repr { width: 3rem }
     `;
   }
 
@@ -30,7 +28,13 @@ export class Slider extends LitElement {
   }
 
   render() {    
-    return html`<input id="slider" type="range" min="0.0" max="1.0" step="0.1" value="${this.value}">
-      <input id="repr" type="number" step="0.5" value="${this.value}">`;
+    return html`
+      <input type="range" value="${this.value}" @input="${this.handleChange}" min="0.0" max="1.0" step="0.05" class="slider">
+      <input type="number" value="${this.value}" @change="${this.handleChange}" min="0.0" max="1.0" step="0.05" class="repr">
+    `;
+  }
+  
+  handleChange( e) {
+    console.log( e.target.value);
   }
 }
