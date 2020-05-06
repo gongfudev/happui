@@ -8,11 +8,10 @@ export class Slider extends LitElement {
         --happ-ui-text-color: #000;
 
         display: inline-block; padding: 0; margin: 0;
-        color: var(--happ-ui-text-color); }
-
-      .label { width: 20% }
-      .slider { width: 60% }
-      .repr { width: 20% }
+        color: var(--happ-ui-text-color);
+        font-size: 85%;
+      }
+      .slider { width: 50% }
     `;
   }
 

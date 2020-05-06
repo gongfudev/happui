@@ -78,6 +78,8 @@ export class HappUi extends LitElement {
 
         .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
         .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
+
+        .sliders { margin: auto; }
       </style>
       <defs>
         <linearGradient id="gradientSEN">
@@ -134,9 +136,11 @@ export class HappUi extends LitElement {
         </g>
       </g>
     </svg>
-    <happ-ui-slider label="SEN" value="${this._sentir}" @slider-change="${this.handleChangeSEN}"></happ-ui-slider>
-    <happ-ui-slider label="CON" value="${this._connaitre}" @slider-change="${this.handleChangeCON}"></happ-ui-slider>
-    <happ-ui-slider label="COM" value="${this._comprendre}" @slider-change="${this.handleChangeCOM}"></happ-ui-slider>`;
+    <div class="sliders">
+      <happ-ui-slider label="SEN" value="${this._sentir}" @slider-change="${this.handleChangeSEN}"></happ-ui-slider>
+      <happ-ui-slider label="CON" value="${this._connaitre}" @slider-change="${this.handleChangeCON}"></happ-ui-slider>
+      <happ-ui-slider label="COM" value="${this._comprendre}" @slider-change="${this.handleChangeCOM}"></happ-ui-slider>
+    </div>`;
   }
 
   handleChangeSEN( e) {
