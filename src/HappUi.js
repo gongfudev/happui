@@ -64,7 +64,7 @@ export class HappUi extends LitElement {
   }
 
   render() {    
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return html`<svg viewBox="0 0 100 100" aria-label="${this.title}" xmlns="http://www.w3.org/2000/svg">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -133,6 +133,9 @@ export class HappUi extends LitElement {
           <circle id="branchCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>`;
+    </svg>
+    <happ-ui-slider value="${this._sentir}"></happ-ui-slider>
+    <happ-ui-slider value="${this._connaitre}"></happ-ui-slider>
+    <happ-ui-slider value="${this._comprendre}"></happ-ui-slider>`;
   }
 }
