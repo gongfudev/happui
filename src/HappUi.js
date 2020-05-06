@@ -134,12 +134,24 @@ export class HappUi extends LitElement {
         </g>
       </g>
     </svg>
-    <happ-ui-slider id="sliderSEN" value="${this._sentir}" @input="${this.handleChange}"></happ-ui-slider>
-    <happ-ui-slider id="sliderCON" value="${this._connaitre}"></happ-ui-slider>
-    <happ-ui-slider id="sliderCOM" value="${this._comprendre}"></happ-ui-slider>`;
+    <happ-ui-slider label="SEN" value="${this._sentir}" @slider-change="${this.handleChangeSEN}"></happ-ui-slider>
+    <happ-ui-slider label="CON" value="${this._connaitre}" @slider-change="${this.handleChangeCON}"></happ-ui-slider>
+    <happ-ui-slider label="COM" value="${this._comprendre}" @slider-change="${this.handleChangeCOM}"></happ-ui-slider>`;
   }
 
-  handleChange( e) {
-    console.log( e);
+  handleChangeSEN( e) {
+    const newValue = e.detail.value;
+    console.log( "changeSEN: " + newValue);
+    this.sentir = newValue;
+  }
+  handleChangeCON( e) {
+    const newValue = e.detail.value;
+    console.log( "changeCON: " + newValue);
+    this.connaitre = newValue;
+  }
+  handleChangeCOM( e) {
+    const newValue = e.detail.value;
+    console.log( "changeCOM: " + newValue);
+    this.comprendre = newValue;
   }
 }

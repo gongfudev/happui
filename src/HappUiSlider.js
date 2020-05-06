@@ -10,13 +10,16 @@ export class Slider extends LitElement {
         display: inline-block; padding: 0; margin: 0;
         color: var(--happ-ui-text-color); }
 
-      input.repr { width: 3rem }
+      .label { width: 20% }
+      .slider { width: 60% }
+      .repr { width: 20% }
     `;
   }
 
   static get properties() {
     return {
       value: { type: Number, reflect: true }, // Value in between 0.0 … 1.0
+      label: { type: String },
     };
   }
 
@@ -25,20 +28,21 @@ export class Slider extends LitElement {
     
     // Observed properties
     this.value = 0.5;
+    this.label = "";
   }
 
   render() {    
     return html`
+      <span class="label">${this.label}</span>
       <input type="range" value="${this.value}" @input="${this.handleChange}" min="0.0" max="1.0" step="0.05" class="slider">
-      <span class="repr">${this.value}</span>
+      <span class="repr">${""+this.value.toFixed(1)}</span>
     `;
   }
   
   handleChange( e) {
-    console.log( e.target.value);
     const newValue = parseFloat( e.target.value);
     this.value = newValue;
-    let myChangeEvent = new CustomEvent( "input", { 
+    let myChangeEvent = new CustomEvent( "slider-change", { 
       detail: { value: newValue }, bubbles: true, composed: true });
     this.dispatchEvent(myChangeEvent);
   }
