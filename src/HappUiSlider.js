@@ -29,17 +29,17 @@ export class Slider extends LitElement {
 
   render() {    
     return html`
-      <input type="range" value="${this.value}" @input="${this.handleRangeUpdate}" min="0.0" max="1.0" step="0.05" class="slider">
-      <input type="number" value="${this.value}" @change="${this.handleNumberUpdate}" min="0.0" max="1.0" step="0.05" class="repr">
+      <input type="range" value="${this.value}" @input="${this.handleChange}" min="0.0" max="1.0" step="0.05" class="slider">
+      <span class="repr">${this.value}</span>
     `;
   }
   
-  handleRangeUpdate( e) {
+  handleChange( e) {
     console.log( e.target.value);
-    this.value = parseFloat( e.target.value);
-  }
-  handleNumberUpdate( e) {
-    console.log( e.target.value);
-    this.value = parseFloat( e.target.value);
+    const newValue = parseFloat( e.target.value);
+    this.value = newValue;
+    let myChangeEvent = new CustomEvent( "input", { 
+      detail: { value: newValue }, bubbles: true, composed: true });
+    this.dispatchEvent(myChangeEvent);
   }
 }
