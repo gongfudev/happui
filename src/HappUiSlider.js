@@ -36,5 +36,6 @@ export class Slider extends LitElement {
   
   handleChange( e) {
     console.log( e.target.value);
+    this.value = parseFloat( e.target.value);
   }
 }
