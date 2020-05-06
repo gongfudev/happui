@@ -16,7 +16,7 @@ export class Slider extends LitElement {
 
   static get properties() {
     return {
-      value: { type: Number }, // Value in between 0.0 … 1.0
+      value: { type: Number, reflect: true }, // Value in between 0.0 … 1.0
     };
   }
 
@@ -29,12 +29,16 @@ export class Slider extends LitElement {
 
   render() {    
     return html`
-      <input type="range" value="${this.value}" @input="${this.handleChange}" min="0.0" max="1.0" step="0.05" class="slider">
-      <input type="number" value="${this.value}" @change="${this.handleChange}" min="0.0" max="1.0" step="0.05" class="repr">
+      <input type="range" value="${this.value}" @input="${this.handleRangeUpdate}" min="0.0" max="1.0" step="0.05" class="slider">
+      <input type="number" value="${this.value}" @change="${this.handleNumberUpdate}" min="0.0" max="1.0" step="0.05" class="repr">
     `;
   }
   
-  handleChange( e) {
+  handleRangeUpdate( e) {
+    console.log( e.target.value);
+    this.value = parseFloat( e.target.value);
+  }
+  handleNumberUpdate( e) {
     console.log( e.target.value);
     this.value = parseFloat( e.target.value);
   }
