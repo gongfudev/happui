@@ -64,7 +64,7 @@ export class HappUi extends LitElement {
   }
 
   render() {    
-    return svg`<svg viewBox="0 0 100 100" aria-label="${this.title}">
+    return html`<svg viewBox="0 0 100 100" aria-label="${this.title}" xmlns="http://www.w3.org/2000/svg">
       <title>${this.title}</title>
       <style>
         .stem { stroke: white; stroke-width: 3.0; }
@@ -78,6 +78,8 @@ export class HappUi extends LitElement {
 
         .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
         .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
+
+        .sliders { margin: auto; }
       </style>
       <defs>
         <linearGradient id="gradientSEN">
@@ -133,6 +135,27 @@ export class HappUi extends LitElement {
           <circle id="branchCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>`;
+    </svg>
+    <div class="sliders">
+      <happ-ui-slider label="SEN" value="${this._sentir}" @slider-change="${this.handleChangeSEN}"></happ-ui-slider>
+      <happ-ui-slider label="CON" value="${this._connaitre}" @slider-change="${this.handleChangeCON}"></happ-ui-slider>
+      <happ-ui-slider label="COM" value="${this._comprendre}" @slider-change="${this.handleChangeCOM}"></happ-ui-slider>
+    </div>`;
+  }
+
+  handleChangeSEN( e) {
+    const newValue = e.detail.value;
+    console.log( "changeSEN: " + newValue);
+    this.sentir = newValue;
+  }
+  handleChangeCON( e) {
+    const newValue = e.detail.value;
+    console.log( "changeCON: " + newValue);
+    this.connaitre = newValue;
+  }
+  handleChangeCOM( e) {
+    const newValue = e.detail.value;
+    console.log( "changeCOM: " + newValue);
+    this.comprendre = newValue;
   }
 }
