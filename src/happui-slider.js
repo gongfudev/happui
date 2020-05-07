@@ -113,9 +113,11 @@ function clamp( val, min, max) {
         this._drag_offset = pos
         const rect_length = 100.0
         let new_circlePos = this._slider_value + proj / rect_length
-        this.value = new_circlePos
-        //console.log('_dragMove', evt.target.id, this.value)
         this.dispatchEvent(new CustomEvent('event-slider', { detail: `${this.value.toFixed(3)}`}));
+        this.value = new_circlePos
+        if (this.value != new_circlePos) { // clamped at end
+          this._drag_offset = undefined
+        }
       }
     }
 
@@ -129,11 +131,9 @@ function clamp( val, min, max) {
         @mousedown="${this._dragStart}"
         @mousemove="${this._dragMove}"
         @mouseup="${this._dragEnd}"
-        @mouseleave="${this._dragEnd}"
         @touchstart="${this._dragStart}"
         @touchmove="${this._dragMove}"
         @touchend="${this._dragEnd}"
-        @touchleave="${this._dragEnd}"
         @touchcancel="${this._dragEnd}"A
       >
         <g transform='translate(10,5)'>
