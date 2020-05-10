@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <title>index_rf.html</title>
+  <meta charset="utf-8">
+  <style>
+    body { background: #fafafa; }
+    #happ-ui-variants { background: #46738d;}
+    .hint {
+      color: white;
+      padding: 0.5em 1em;
+      font-size: 12px;
+      font-family: "Lucida Console", Monaco, monospace;
+    }
+    happ-ui { width: 45%; height: 45%; }
+    happ-ui-dragme { width: 45%; height: 45%; }
+    happ-contactsheet { width: 100%; height: 100%; }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="happ-ui-variants">
+    <p class="hint">drag my circle</p>
+    <happ-ui-dragme></happ-ui-dragme>
+    <happ-ui></happ-ui>
+  </div>
+
+  <div id="happ-contactsheet">
+    <happ-contactsheet></happ-contactsheet>
+  </div>
+
+  <script type="module">
+    import './happ-ui-dragme.js';
+    import './happ-ui.js';
+    import './happ-contactsheet.js';
+  </script>
+</body>
+</html>
