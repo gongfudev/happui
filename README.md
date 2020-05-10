@@ -37,6 +37,23 @@ npm i happ-ui
          sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui>
 ```
 
+## Usage variants
+
+```html
+<script type="module">
+  import 'happ-ui/happ-ui-dragme.js';
+</script>
+
+<happ-ui-dragme title="Color Wheel with Draggable Pistils"
+         sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui-dragme>
+
+
+<div id="happ-contactsheet" title="Contact sheet with 8x5 happ-ui + happ-ui-dragme">
+  <happ-contactsheet></happ-contactsheet>
+</div>
+
+```
+
 ## Demoing with Storybook
 
 To run a local instance of Storybook for your component, run
