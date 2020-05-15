@@ -22,18 +22,32 @@
 </head>
 
 <body>
-
+  <!-- experimental -->
   <div id="happ-ui-exp">
-    <p class="hint">experimental</p>
-    <happ-ui-exp></happ-ui-exp>
+    <p class="hint">select
+      <select name="select-variant" id="select-variant">
+        <option value="wheel1">wheel1</option>
+        <option value="wheel2">wheel2</option>
+      </select>       
+    </p>
+    <happ-ui-exp id="happuiwheel" variant="wheel1"></happ-ui-exp>
+
+    <script>
+      const happuiwheel = document.getElementById('happuiwheel');
+      document.getElementById('select-variant').addEventListener('change', (e) => {
+        happuiwheel.setAttribute('variant', e.target.value);
+      }); 
+    </script>
   </div>
 
+  <!-- variants <happ-ui-dragme> <happ-ui> -->
   <div id="happ-ui-variants">
     <p class="hint">drag my circle</p>
     <happ-ui-dragme></happ-ui-dragme>
     <happ-ui></happ-ui>
   </div>
 
+  <!-- contactsheet -->
   <div id="happ-contactsheet">
     <happ-contactsheet></happ-contactsheet>
   </div>

@@ -41,6 +41,7 @@ export class HappUiExp extends LitElement {
       sentir: { type: Number }, // Value in between 0.0 … 1.0
       connaitre: { type: Number }, // idem
       comprendre: { type: Number }, // idem
+      variant: { String },
     };
   }
 
@@ -57,14 +58,28 @@ export class HappUiExp extends LitElement {
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
 
-    this._sentir_angle = 30
-    this._connaitre_angle = 150
-    this._comprendre_angle = 270
+    this._sentir_angle = 270;
+    this._connaitre_angle = 30;
+    this._comprendre_angle = 150;
+
+    // wheel variants
+
+    this._variant = "wheel1";
+    this._variants = ["wheel1", "wheel2"];
 
     // dragging variables
     this._pistil_names = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
     this._dragged_pistil_name = undefined
     this._offset = undefined
+  }
+
+  get variant() { return this._variant; }
+  set variant(val) {
+    let oldVal = this._variant;
+    if (this._variants.includes(val)) {
+      this._variant = val;
+      this.requestUpdate( 'variant', oldVal);
+    }
   }
 
   get sentir() { return this._sentir; }
@@ -158,7 +173,78 @@ export class HappUiExp extends LitElement {
     `;
   } 
 
+  wheel2() {
+    return svg`
+    <style>
+      .stem { stroke: white; stroke-width: 3.0; }
+      .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
+
+      .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
+      .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
+
+      .stop3 { stop-color: #00a2ff; stop-opacity: 15%; }
+      .stop4 { stop-color: #00a500; stop-opacity: 100%; }
+
+      .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
+      .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
+
+      .sliders { margin: auto; }
+    </style>
+    <defs>
+      <linearGradient id="gradientSEN">
+        <stop class="stop1" offset="0%"/>
+        <stop class="stop2" offset="75%"/>
+      </linearGradient>
+
+      <linearGradient id="gradientCON">
+        <stop class="stop3" offset="0%"/>
+        <stop class="stop4" offset="75%"/>
+      </linearGradient>
+
+      <linearGradient id="gradientCOM">
+        <stop class="stop5" offset="0%"/>
+        <stop class="stop6" offset="75%"/>
+      </linearGradient>
+      <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
+      </filter>
+      <mask id="circle">
+        <circle cx="50" cy="50" r="50" fill="white"/>
+      </mask>
+    </defs>
+    <g id="background" mask="url(#circle)" filter="url(#blur)"> <!--   -->
+      <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
+      <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
+        <circle id="backSEN:color" fill="url(#gradientSEN)"
+          cx="${30 - this._sentir * 5}" cy="0"
+          r="${10 + this._sentir * 50}" />
+      </g>
+      <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
+        <circle id="backCON:color" fill="url(#gradientCON)"
+          cx="${30 - this._connaitre * 5}" cy="0"
+          r="${10 + this._connaitre * 50}" />
+      </g>
+      <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
+        <circle id="backCOM:color" fill="url(#gradientCOM)"
+          cx="${30 - this._comprendre * 5}" cy="0"
+          r="${10 + this._comprendre * 50}" />
+      </g>
+    </g>
+    `;
+  }
+
+  wheel() {
+    if (this.variant == 'wheel1') {
+      return this.wheel1()
+    } else if (this.variant == 'wheel2') {
+      return this.wheel2()
+    } else {
+      return svg``;
+    }
+  }
+
   render() {
+    console.log(`variant= ${this.variant}`)
     return html`<svg viewBox="0 0 100 100"
         aria-label="${this.title}"
         @mousedown="${this._mousedown}"
@@ -171,17 +257,20 @@ export class HappUiExp extends LitElement {
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
       </style>
-      ${this.wheel1()} 
+      ${this.wheel()} 
       <g id="pistils">
-        <g id="p0" transform="translate(50 50) rotate(30 0 0)">
+        <g id="p0" transform="translate(50 50) rotate(${this._sentir_angle} 0 0)">
+          <title>sentir</title>
           <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
           <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
         </g>
-        <g id="p1" transform="translate(50 50) rotate(150 0 0)">
+        <g id="p1" transform="translate(50 50) rotate(${this._connaitre_angle} 0 0)">
+          <title>connaitre</title>
           <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
           <circle id="p1:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
         </g>
-        <g id="p2" transform="translate(50 50) rotate(270 0 0)">
+        <g id="p2" transform="translate(50 50) rotate(${this._comprendre_angle} 0 0)">
+          <title>comprendre</title>
           <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
           <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
