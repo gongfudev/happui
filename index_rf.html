@@ -6,13 +6,14 @@
   <meta charset="utf-8">
   <style>
     body { background: #fafafa; }
-    #happ-ui-variants { background: #46738d;}
+    #happ-ui-variants, #happ-ui-exp { background: #46738d;}
     .hint {
       color: white;
       padding: 0.5em 1em;
       font-size: 12px;
       font-family: "Lucida Console", Monaco, monospace;
     }
+    happ-ui-exp { width: 45%; height: 45%; }
     happ-ui { width: 45%; height: 45%; }
     happ-ui-dragme { width: 45%; height: 45%; }
     happ-contactsheet { width: 100%; height: 100%; }
@@ -21,6 +22,11 @@
 </head>
 
 <body>
+
+  <div id="happ-ui-exp">
+    <p class="hint">experimental</p>
+    <happ-ui-exp></happ-ui-exp>
+  </div>
 
   <div id="happ-ui-variants">
     <p class="hint">drag my circle</p>
@@ -33,6 +39,7 @@
   </div>
 
   <script type="module">
+    import './happ-ui-exp.js';
     import './happ-ui-dragme.js';
     import './happ-ui.js';
     import './happ-contactsheet.js';
