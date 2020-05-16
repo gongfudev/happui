@@ -6,14 +6,16 @@
   <meta charset="utf-8">
   <style>
     body { background: #fafafa; }
-    #happ-ui-variants, #happ-ui-exp { background: #46738d;}
+    #happ-ui-variants { background: #46738d;}
+    #happ-ui-variants, #happuiexp { background: #000;}
     .hint {
       color: white;
       padding: 0.5em 1em;
       font-size: 12px;
       font-family: "Lucida Console", Monaco, monospace;
     }
-    happ-ui-exp { width: 45%; height: 45%; }
+    happ-ui-exp { width: 45%; height: 45%;
+      margin: 5%;  }
     happ-ui { width: 45%; height: 45%; }
     happ-ui-dragme { width: 45%; height: 45%; }
     happ-contactsheet { width: 100%; height: 100%; }
@@ -23,14 +25,15 @@
 
 <body>
   <!-- experimental -->
-  <div id="happ-ui-exp">
+  <div id="happuiexp">
     <p class="hint">select
       <select name="select-variant" id="select-variant">
+        <option value="wheel3">wheel3</option>
         <option value="wheel1">wheel1</option>
         <option value="wheel2">wheel2</option>
       </select>       
     </p>
-    <happ-ui-exp id="happuiwheel" variant="wheel1"></happ-ui-exp>
+    <happ-ui-exp id="happuiwheel" variant="wheel3"></happ-ui-exp>
 
     <script>
       const happuiwheel = document.getElementById('happuiwheel');

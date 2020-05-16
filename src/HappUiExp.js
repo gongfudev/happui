@@ -65,7 +65,7 @@ export class HappUiExp extends LitElement {
     // wheel variants
 
     this._variant = "wheel1";
-    this._variants = ["wheel1", "wheel2"];
+    this._variants = ["wheel1", "wheel2", "wheel3"];
 
     // dragging variables
     this._pistil_names = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
@@ -152,7 +152,7 @@ export class HappUiExp extends LitElement {
 
   wheel1() {
     return svg`
-      <rect x='0' y='0' width='200' height='200' fill= 'lightgray' />
+      <rect_x x='0' y='0' width='200' height='200' fill= 'lightgray' />
       <defs>
         <filter id="blur" color-interpolation-filters="linear" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
@@ -232,12 +232,44 @@ export class HappUiExp extends LitElement {
     </g>
     `;
   }
+  
+  wheel3() {
+    return svg`
+    <style>
+      .circle-mbm { mix-blend-mode: screen; }  
+      .isolated { isolation: isolate; } 
+    </style>
 
+    <defs>
+      <radialGradient id="RadialGradient-R1" fx="75%" fy="50%" fr="17%" cx="75%" cy="50%" r="70%">
+        <stop offset="0%" style='stop-color: red; stop-opacity: 0.0;' />
+        <stop offset="100%" style='stop-color: red; stop-opacity: ${this._connaitre};' />
+      </radialGradient>
+      <radialGradient id="RadialGradient-G1" fx="75%" fy="50%" fr="17%" cx="75%" cy="50%" r="70%">
+        <stop offset="0%" style='stop-color: lime; stop-opacity: 0.0;' />
+        <stop offset="100%" style='stop-color: lime; stop-opacity: ${this._comprendre};' />
+      </radialGradient>
+      <radialGradient id="RadialGradient-B1" fx="75%" fy="50%" fr="17%" cx="75%" cy="50%" r="70%">
+        <stop offset="0%" style='stop-color: blue; stop-opacity: 0.0;' />
+        <stop offset="100%" style='stop-color: blue; stop-opacity: ${this._sentir};' />
+      </radialGradient>
+    </defs>
+
+    <g class="circle-mbm isolated" transform="translate(50, 50)">
+      <circle cx="0" cy="0" r="50" fill="url(#RadialGradient-R1)" transform='rotate(${this._connaitre_angle})' />
+      <circle cx="0" cy="0" r="50" fill="url(#RadialGradient-G1)" transform='rotate(${this._comprendre_angle})' />
+      <circle cx="0" cy="0" r="50" fill="url(#RadialGradient-B1)" transform='rotate(${this._sentir_angle})' />
+    </g>
+    `;
+  }
+ 
   wheel() {
     if (this.variant == 'wheel1') {
       return this.wheel1()
     } else if (this.variant == 'wheel2') {
       return this.wheel2()
+    } else if (this.variant == 'wheel3') {
+      return this.wheel3()
     } else {
       return svg``;
     }
