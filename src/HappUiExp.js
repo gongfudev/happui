@@ -21,6 +21,45 @@ function clamp( val, min, max) {
   return val <= min ? min : val >= max ? max : val;
 }
 
+// wheel4 matrix utilites
+
+let MatrixProd = (A, B) =>
+  A.map((row, i) =>
+    B[0].map((_, j) =>
+      row.reduce((acc, _, n) =>
+        acc + A[i][n] * B[n][j], 0
+      )
+    )
+  )
+
+// return the mean value of a vector of numbers
+function vectorMean(vector) {
+  let n = vector.length
+  let total = vector.reduce((acc, item) => acc + item)
+  return total / n
+}
+
+// return the vector normalized so that max element <= norm
+function vectorNorm(vector, norm) {
+  let max = vector.reduce((acc, item) => acc < item ? item : acc)
+  if (max > norm) {
+    return vector.map((item) => item / norm)
+  } else {
+    return vector
+  }
+}
+
+// return the weighted mean color from colorTriplet
+function colorWeightedMean(weights, colorTriplet) {
+  // weights: vecttor like [1, 1, 0]
+  // colorTriplet: matrix like [ [ 255, 255, 0 ], [ 0, 255, 0 ], [ 0, 0, 255 ] ]
+  // result: vector like [ 85, 170, 0 ]
+  // let matrixWeights = MatrixProd([[1/3]], [weights])
+  let matrixWeights = MatrixProd([[0.5]], [weights])
+  return MatrixProd(matrixWeights, colorTriplet)[0]
+}
+
+
 // Web Component definition
 export class HappUiExp extends LitElement {
   static get styles() {
@@ -264,9 +303,15 @@ export class HappUiExp extends LitElement {
   }
 
   wheel4() {
+    const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
+    const weights = [ this.sentir, this.connaitre, this.comprendre ]
+    const colorVector = colorWeightedMean(weights, colorTriplet)
+    const colorVectorNorm = vectorNorm(colorVector, 255)
+    const fillColor = `rgb(${colorVector[0]},${colorVector[1]},${colorVector[2]})`
+    console.log(fillColor)
     return svg`
     <g  transform="translate(50, 50)">
-    <circle cx="0" cy="0" r="50" fill="gray" transform='rotate(0)' />
+    <circle cx="0" cy="0" r="50" fill="${fillColor}" transform='rotate(0)' />
   </g>
 
     `;
