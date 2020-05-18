@@ -65,7 +65,7 @@ export class HappUiExp extends LitElement {
     // wheel variants
 
     this._variant = "wheel1";
-    this._variants = ["wheel1", "wheel2", "wheel3"];
+    this._variants = ["wheel1", "wheel2", "wheel3", "wheel4"];
 
     // dragging variables
     this._pistil_names = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
@@ -262,14 +262,25 @@ export class HappUiExp extends LitElement {
     </g>
     `;
   }
- 
+
+  wheel4() {
+    return svg`
+    <g  transform="translate(50, 50)">
+    <circle cx="0" cy="0" r="50" fill="gray" transform='rotate(0)' />
+  </g>
+
+    `;
+  }
+
   wheel() {
     if (this.variant == 'wheel1') {
       return this.wheel1()
     } else if (this.variant == 'wheel2') {
       return this.wheel2()
     } else if (this.variant == 'wheel3') {
-      return this.wheel3()
+      return this.wheel3()    
+    } else if (this.variant == 'wheel4') {
+      return this.wheel4()
     } else {
       return svg``;
     }
