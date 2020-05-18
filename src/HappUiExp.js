@@ -43,10 +43,21 @@ function vectorMean(vector) {
 function vectorNorm(vector, norm) {
   let max = vector.reduce((acc, item) => acc < item ? item : acc)
   if (max > norm) {
-    return vector.map((item) => item / norm)
+    let factor = norm / max
+    return vector.map((item) => item * factor)
   } else {
     return vector
   }
+}
+
+// return the max value of a vector of positive numbers
+function vectorMax(vector) {
+  return vector.reduce((acc, item) => acc < item ? item : acc)
+}
+
+// return the scalar product of vector by factor
+function vectorMult(vector, factor) {
+  return vector.map((item) => item * factor)
 }
 
 // return the weighted mean color from colorTriplet
@@ -55,7 +66,7 @@ function colorWeightedMean(weights, colorTriplet) {
   // colorTriplet: matrix like [ [ 255, 255, 0 ], [ 0, 255, 0 ], [ 0, 0, 255 ] ]
   // result: vector like [ 85, 170, 0 ]
   // let matrixWeights = MatrixProd([[1/3]], [weights])
-  let matrixWeights = MatrixProd([[0.5]], [weights])
+  let matrixWeights = MatrixProd([[1.0]], [weights])
   return MatrixProd(matrixWeights, colorTriplet)[0]
 }
 
@@ -303,17 +314,44 @@ export class HappUiExp extends LitElement {
   }
 
   wheel4() {
+    //const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
     const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
+    // find normalization factor
+    const colorTripletVector = colorWeightedMean([1,1,1], colorTriplet)
+    const colorTripletVectorMax = vectorMax(colorTripletVector)
+    const factor = 255 / colorTripletVectorMax
+    // compute current color
     const weights = [ this.sentir, this.connaitre, this.comprendre ]
     const colorVector = colorWeightedMean(weights, colorTriplet)
-    const colorVectorNorm = vectorNorm(colorVector, 255)
-    const fillColor = `rgb(${colorVector[0]},${colorVector[1]},${colorVector[2]})`
-    console.log(fillColor)
+    const colorVectorNorm = vectorMult(colorVector, factor)
+    const fillColor = `rgb(${colorVectorNorm[0]},${colorVectorNorm[1]},${colorVectorNorm[2]})`
+    // console.log(colorVector)
+    // console.log(colorVectorNorm)
+    // console.log(fillColor)
+    const weightsMean = vectorMean(weights)
     return svg`
     <g  transform="translate(50, 50)">
-    <circle cx="0" cy="0" r="50" fill="${fillColor}" transform='rotate(0)' />
-  </g>
+      <circle cx="0" cy="0" r="50" fill="${fillColor}" transform='rotate(0)' />
+    </g>
 
+    <style>
+    .pink { fill: #e630bc }
+    .white { fill: #ffffff }
+    </style>
+  
+    <defs>
+      <path id="1p" stroke="#333333" stroke-width="1" d="M0,0 q50,-30 100,0 q-50,30 -100,0" />
+      <path id="2p" stroke="#333333" stroke-width="1" d="M0,0 q50,-25 100,0 q-50,25 -100,0 q-50,25 -100,0 q50,-25 100,0" />
+      <g id='6p'>
+        <use href='#2p' transform='rotate(0)' />
+        <use href='#2p' transform='rotate(60)' />
+        <use href='#2p' transform='rotate(120)' />
+      </g>
+    </defs>
+    <g class='white' transform='translate(50,50) scale(${weightsMean * 0.6})'>
+      <use href='#6p' transform='scale(1.0)' />
+      <use href='#6p' transform='rotate(30) scale(0.5)' />
+    </g>
     `;
   }
 
