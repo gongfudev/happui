@@ -70,6 +70,8 @@ export class HappUi extends LitElement {
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
 
+        .mix-mode { mix-blend-mode: hard-light; }
+
         .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
         .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
 
@@ -106,17 +108,17 @@ export class HappUi extends LitElement {
       <g id="background" mask="url(#circle)" filter="url(#blur)"> <!--   -->
         <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
         <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
-          <circle id="backSEN:color" fill="url(#gradientSEN)"
+          <circle id="backSEN:color" fill="url(#gradientSEN)" class="mix-mode"
             cx="${30 - this._sentir * 5}" cy="0"
              r="${10 + this._sentir * 50}" />
         </g>
         <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
-          <circle id="backCON:color" fill="url(#gradientCON)"
+          <circle id="backCON:color" fill="url(#gradientCON)" class="mix-mode"
             cx="${30 - this._connaitre * 5}" cy="0"
              r="${10 + this._connaitre * 50}" />
         </g>
         <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
-          <circle id="backCOM:color" fill="url(#gradientCOM)"
+          <circle id="backCOM:color" fill="url(#gradientCOM)" class="mix-mode"
             cx="${30 - this._comprendre * 5}" cy="0"
              r="${10 + this._comprendre * 50}" />
         </g>
