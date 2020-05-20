@@ -115,7 +115,7 @@ export class HappUiExp extends LitElement {
     // wheel variants
 
     this._variant = "wheel1";
-    this._variants = ["wheel1", "wheel2", "wheel3", "wheel4"];
+    this._variants = ["wheel1", "wheel2", "wheel3a", "wheel3b", "wheel4"];
 
     // dragging variables
     this._pistil_names = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
@@ -283,10 +283,10 @@ export class HappUiExp extends LitElement {
     `;
   }
   
-  wheel3() {
+  wheel3a() {
     return svg`
     <style>
-      .circle-mbm { mix-blend-mode: screen; }  
+      .mbm { mix-blend-mode: screen; }
       .isolated { isolation: isolate; } 
     </style>
 
@@ -305,10 +305,41 @@ export class HappUiExp extends LitElement {
       </radialGradient>
     </defs>
 
-    <g class="circle-mbm isolated" transform="translate(50, 50)">
-      <circle cx="0" cy="0" r="50" fill="url(#RadialGradient-R1)" transform='rotate(${this._connaitre_angle})' />
-      <circle cx="0" cy="0" r="50" fill="url(#RadialGradient-G1)" transform='rotate(${this._comprendre_angle})' />
-      <circle cx="0" cy="0" r="50" fill="url(#RadialGradient-B1)" transform='rotate(${this._sentir_angle})' />
+    <g  transform="translate(50, 50)">
+      <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-R1)" transform='rotate(${this._connaitre_angle})' />
+      <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-G1)" transform='rotate(${this._comprendre_angle})' />
+      <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-B1)" transform='rotate(${this._sentir_angle})' />
+    </g>
+    `;
+  }
+
+  //.isolated { isolation: isolate; }
+
+  wheel3b() {
+    return svg`
+    <style>
+      .mbm { mix-blend-mode: screen; }
+    </style>
+
+    <defs>
+      <radialGradient id="RadialGradient-R1" fx="${45 * (1 + this._connaitre)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" style='stop-color: hsl(0,${45 * (1 + this._connaitre)}%,50%); ' />
+        <stop offset="100%" style='stop-color: hsl(0,10%,10%); ' />
+      </radialGradient>
+      <radialGradient id="RadialGradient-G1" fx="${45 * (1 + this._comprendre)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" style='stop-color: hsl(120,${45 * (1 + this._comprendre)}%,50%); ' />
+        <stop offset="100%" style='stop-color: hsl(120,10%,10%); ' />
+      </radialGradient>
+      <radialGradient id="RadialGradient-B1" fx="${45 * (1 + this._sentir)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" style='stop-color: hsl(240,${45 * (1 + this._sentir)}%,50%); ' />
+        <stop offset="100%" style='stop-color: hsl(240,10%,10%); ' />
+      </radialGradient>
+    </defs>
+
+    <g transform="translate(50, 50)">
+      <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-R1)" transform='rotate(${this._connaitre_angle})' />
+      <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-G1)" transform='rotate(${this._comprendre_angle})' />
+      <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-B1)" transform='rotate(${this._sentir_angle})' />
     </g>
     `;
   }
@@ -360,8 +391,10 @@ export class HappUiExp extends LitElement {
       return this.wheel1()
     } else if (this.variant == 'wheel2') {
       return this.wheel2()
-    } else if (this.variant == 'wheel3') {
-      return this.wheel3()    
+    } else if (this.variant == 'wheel3a') {
+      return this.wheel3a()    
+    } else if (this.variant == 'wheel3b') {
+      return this.wheel3b()
     } else if (this.variant == 'wheel4') {
       return this.wheel4()
     } else {
