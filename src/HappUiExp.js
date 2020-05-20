@@ -348,15 +348,15 @@ export class HappUiExp extends LitElement {
     <defs>
       <radialGradient id="RadialGradient-R1" fx="${45 * (1 + this._connaitre)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
         <stop offset="0%" style='stop-color: hsl(0,${45 * (1 + this._connaitre)}%,50%); ' />
-        <stop offset="100%" style='stop-color: hsl(0,10%,10%); ' />
+        <stop offset="100%" style='stop-color: hsl(0,45%,10%); ' />
       </radialGradient>
       <radialGradient id="RadialGradient-G1" fx="${45 * (1 + this._comprendre)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
         <stop offset="0%" style='stop-color: hsl(120,${45 * (1 + this._comprendre)}%,50%); ' />
-        <stop offset="100%" style='stop-color: hsl(120,10%,10%); ' />
+        <stop offset="100%" style='stop-color: hsl(120,45%,10%); ' />
       </radialGradient>
       <radialGradient id="RadialGradient-B1" fx="${45 * (1 + this._sentir)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
         <stop offset="0%" style='stop-color: hsl(240,${45 * (1 + this._sentir)}%,50%); ' />
-        <stop offset="100%" style='stop-color: hsl(240,10%,10%); ' />
+        <stop offset="100%" style='stop-color: hsl(240,45%,10%); ' />
       </radialGradient>
     </defs>
 
