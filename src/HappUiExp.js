@@ -1,5 +1,25 @@
 import { html, svg, css, LitElement } from 'lit-element';
 
+function happUiLogoDimensions(outerRadius) {
+  const R = outerRadius;    // radius outer circle
+  const R2 = R * 0.85;      // radius inner circle
+  const inc = R2 / 10       // branch step
+  const L1 = inc / 2        // branch line thickness
+  const L2 = inc * 0.75     // lollipop line thickness
+  const lolor = inc * 1.125 // lollipop radius
+  const dbp = inc * 6.5     // default branch position
+  const dimensions = {
+    R: R,
+    R2: R2,
+    inc: inc,
+    L1: L1,
+    L2: L2,
+    lolor: lolor,
+    dbp: dbp
+  }
+  return dimensions;
+}
+
 // from http://www.petercollingridge.co.uk/tutorials/svg/interactive/dragging/
 // and https://github.com/petercollingridge/code-for-blog/blob/36ba73c7b763022731a72813249cdc56e7dba8c0/svg-interaction/draggable/draggable_groups.svg?short_path=be4270d
 
@@ -151,6 +171,10 @@ export class HappUiExp extends LitElement {
     let oldVal = this._comprendre;
     this._comprendre = clamp( val, this.__min, this.__max);
     this.requestUpdate( 'comprendre', oldVal);
+  }
+
+  firstUpdated(changedProperties) {
+    console.table(happUiLogoDimensions(100))
   }
 
   _getMousePosition(evt) {
