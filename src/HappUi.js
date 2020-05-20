@@ -70,7 +70,7 @@ export class HappUi extends LitElement {
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
 
-        .mix-mode { mix-blend-mode: hard-light; }
+        .mix-mode { mix-blend-mode: color-dodge; }
 
         .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
         .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
