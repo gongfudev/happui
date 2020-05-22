@@ -2,20 +2,20 @@ import { html, svg, css, LitElement } from 'lit-element';
 
 function happUiLogoDimensions(outerRadius) {
   const R = outerRadius;    // radius outer circle
-  const R2 = R * 0.85;      // radius inner circle
-  const inc = R2 / 10       // branch step
+  const inc = R / 10       // branch step
   const L1 = inc / 2        // branch line thickness
   const L2 = inc * 0.75     // lollipop line thickness
   const lolor = inc * 1.125 // lollipop radius
   const dbp = inc * 6.5     // default branch position
+  const boxwh = R * 2      // box width and height
   const dimensions = {
     R: R,
-    R2: R2,
     inc: inc,
     L1: L1,
     L2: L2,
     lolor: lolor,
-    dbp: dbp
+    dbp: dbp,
+    boxwh: boxwh
   }
   return dimensions;
 }
@@ -120,9 +120,9 @@ export class HappUiExp extends LitElement {
 
     // Observed properties
     this.title = 'DragMe';
-    this._sentir = 0.75;
-    this._connaitre = 0.75;
-    this._comprendre = 0.75;
+    this._sentir = 0.65;
+    this._connaitre = 0.65;
+    this._comprendre = 0.65;
 
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
@@ -174,7 +174,7 @@ export class HappUiExp extends LitElement {
   }
 
   firstUpdated(changedProperties) {
-    console.table(happUiLogoDimensions(100))
+    //console.table(happUiLogoDimensions(100))
   }
 
   _getMousePosition(evt) {
@@ -236,7 +236,7 @@ export class HappUiExp extends LitElement {
         </mask>
       </defs>
 
-      <g id="background-circle" mask="url(#circle)" filter="url(#blur)">
+      <g id="background-circle" mask="url(#circle)" filter="url(#blur)" >
         <rect x="-10" width="110" height="110" fill="hsl(240,100%,${this._connaitre*52}%)"/> <!-- blue -->
         <rect x="50" width="60" height="110" fill="hsl(60,100%,${this._sentir*52}%)"/> <!-- yellow -->
         <polygon points="50,50, 60,110, 40,110" fill="hsl(150,100%,${(this._connaitre+this._sentir)*26}%)"/> <!-- #0f8 / green -->
@@ -250,8 +250,6 @@ export class HappUiExp extends LitElement {
   wheel2() {
     return svg`
     <style>
-      .stem { stroke: white; stroke-width: 3.0; }
-      .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
 
       .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
       .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
@@ -286,7 +284,7 @@ export class HappUiExp extends LitElement {
         <circle cx="50" cy="50" r="50" fill="white"/>
       </mask>
     </defs>
-    <g id="background" mask="url(#circle)" filter="url(#blur)"> <!--   -->
+    <g id="background" mask="url(#circle)" filter="url(#blur)" > <!--   -->
       <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
       <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
         <circle id="backSEN:color" fill="url(#gradientSEN)"
@@ -311,7 +309,6 @@ export class HappUiExp extends LitElement {
     return svg`
     <style>
       .mbm { mix-blend-mode: screen; }
-      .isolated { isolation: isolate; } 
     </style>
 
     <defs>
@@ -330,14 +327,13 @@ export class HappUiExp extends LitElement {
     </defs>
 
     <g  transform="translate(50, 50)">
+      <circle id="background"  cx="0" cy="0" r="50" style="background: black; " />
       <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-R1)" transform='rotate(${this._connaitre_angle})' />
       <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-G1)" transform='rotate(${this._comprendre_angle})' />
       <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-B1)" transform='rotate(${this._sentir_angle})' />
     </g>
     `;
   }
-
-  //.isolated { isolation: isolate; }
 
   wheel3b() {
     return svg`
@@ -348,19 +344,20 @@ export class HappUiExp extends LitElement {
     <defs>
       <radialGradient id="RadialGradient-R1" fx="${45 * (1 + this._connaitre)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
         <stop offset="0%" style='stop-color: hsl(0,${45 * (1 + this._connaitre)}%,50%); ' />
-        <stop offset="100%" style='stop-color: hsl(0,45%,10%); ' />
+        <stop offset="100%" style='stop-color: hsl(0,10%,10%); ' />
       </radialGradient>
       <radialGradient id="RadialGradient-G1" fx="${45 * (1 + this._comprendre)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
         <stop offset="0%" style='stop-color: hsl(120,${45 * (1 + this._comprendre)}%,50%); ' />
-        <stop offset="100%" style='stop-color: hsl(120,45%,10%); ' />
+        <stop offset="100%" style='stop-color: hsl(120,10%,10%); ' />
       </radialGradient>
       <radialGradient id="RadialGradient-B1" fx="${45 * (1 + this._sentir)}%" fy="50%" fr="10%" cx="50%" cy="50%" r="50%">
         <stop offset="0%" style='stop-color: hsl(240,${45 * (1 + this._sentir)}%,50%); ' />
-        <stop offset="100%" style='stop-color: hsl(240,45%,10%); ' />
+        <stop offset="100%" style='stop-color: hsl(240,10%,10%); ' />
       </radialGradient>
     </defs>
 
     <g transform="translate(50, 50)">
+      <circle id="background"  cx="0" cy="0" r="50" style="background: black; " />
       <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-R1)" transform='rotate(${this._connaitre_angle})' />
       <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-G1)" transform='rotate(${this._comprendre_angle})' />
       <circle class="mbm" cx="0" cy="0" r="50" fill="url(#RadialGradient-B1)" transform='rotate(${this._sentir_angle})' />
@@ -369,7 +366,6 @@ export class HappUiExp extends LitElement {
   }
 
   wheel4() {
-    //const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
     const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
     // find normalization factor
     const colorTripletVector = colorWeightedMean([1,1,1], colorTriplet)
@@ -383,15 +379,15 @@ export class HappUiExp extends LitElement {
     // console.log(colorVector)
     // console.log(colorVectorNorm)
     // console.log(fillColor)
-    const weightsMean = vectorMean(weights)
+    const flowerScale = vectorMean(weights)
     return svg`
     <g  transform="translate(50, 50)">
       <circle cx="0" cy="0" r="50" fill="${fillColor}" transform='rotate(0)' />
     </g>
 
     <style>
-    .pink { fill: #e630bc }
-    .white { fill: #ffffff }
+      .pink { fill: #e630bc }
+      .white { fill: #ffffff }
     </style>
   
     <defs>
@@ -403,7 +399,7 @@ export class HappUiExp extends LitElement {
         <use href='#2p' transform='rotate(120)' />
       </g>
     </defs>
-    <g class='white' transform='translate(50,50) scale(${weightsMean * 0.6})'>
+    <g id='flower' class='white' transform='translate(50, 50) scale(${flowerScale * 0.6})'>
       <use href='#6p' transform='scale(1.0)' />
       <use href='#6p' transform='rotate(30) scale(0.5)' />
     </g>
@@ -428,6 +424,8 @@ export class HappUiExp extends LitElement {
 
   render() {
     console.log(`variant= ${this.variant}`)
+    const dims = happUiLogoDimensions(50)
+    console.table(dims)
     return html`<svg viewBox="0 0 100 100"
         aria-label="${this.title}"
         @mousedown="${this._mousedown}"
@@ -437,29 +435,28 @@ export class HappUiExp extends LitElement {
       >
       <title>${this.title}</title>
       <style>
-        .stem { stroke: white; stroke-width: 3.0; }
-        .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
+        .stem { stroke: white; stroke-width: 2.5; }
+        .sprout { stroke: white; stroke-width: 3.75; fill-opacity: 0.0; }
       </style>
+
       ${this.wheel()} 
       <g id="pistils">
         <g id="p0" transform="translate(50 50) rotate(${this._sentir_angle} 0 0)">
           <title>sentir</title>
           <line id="p0:stem" class="stem" x1="0" y1="0" x2="${this._sentir * 47 - 5}" y2="0" />
-          <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5" />
+          <circle id="p0:sprout" class="sprout" cx="${this._sentir * 47}" cy="0" r="5.625" />
         </g>
         <g id="p1" transform="translate(50 50) rotate(${this._connaitre_angle} 0 0)">
           <title>connaitre</title>
           <line id="p1:stem" class="stem" x1="0" y1="0" x2="${this._connaitre * 47 - 5}" y2="0" />
-          <circle id="p1:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5" />
+          <circle id="p1:sprout" class="sprout" cx="${this._connaitre * 47}" cy="0" r="5.625" />
         </g>
         <g id="p2" transform="translate(50 50) rotate(${this._comprendre_angle} 0 0)">
           <title>comprendre</title>
           <line id="p2:stem" class="stem" x1="0" y1="0" x2="${this._comprendre * 47 - 5}" y2="0" />
-          <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
+          <circle id="p2:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5.625" />
         </g>
       </g>
     </svg>`;
   }
 }
-
-//window.customElements.define('happ-ui-dragme', HappUiDragme);
