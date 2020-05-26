@@ -127,20 +127,22 @@ export class HappUiExp extends LitElement {
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
     this.__min = 0.10; // Minimum value … idem …
+    this.__step = 0.05 // of R
 
     this._sentir_angle = 270;
     this._connaitre_angle = 30;
     this._comprendre_angle = 150;
 
     // wheel variants
-
     this._variant = "wheel1";
     this._variants = ["wheel1", "wheel2", "wheel3a", "wheel3b", "wheel4"];
 
-    // dragging variables
-    this._pistil_names = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
-    this._dragged_pistil_name = undefined
+    // dragging and click variables
+    this._pistil_from_stem = {'p0:stem': 'sentir', 'p1:stem': 'connaitre', 'p2:stem': 'comprendre'}
+    this._pistil_from_sprout = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
+    this._dragged_pistil = undefined
     this._offset = undefined
+    this._move_count = 0
   }
 
   get variant() { return this._variant; }
@@ -187,19 +189,19 @@ export class HappUiExp extends LitElement {
   }
 
   _mousedown(evt) {
-    //console.log('_mousedown', evt.target.id)
-    let pistil_name = this._pistil_names[evt.target.id]
+    console.log('_mousedown', evt.target.id)
+    let pistil_name = this._pistil_from_sprout[evt.target.id]
     if (pistil_name) {
       //console.log('_mousedown', evt.target.id)
       let mousePos = this._getMousePosition(evt)
       this._offset = mousePos
-      this._dragged_pistil_name = pistil_name
+      this._dragged_pistil = pistil_name
     }
   }
 
   _mousemove(evt) {
-    if (this._dragged_pistil_name) {
-      let pistil_name = this._dragged_pistil_name
+    if (this._dragged_pistil) {
+      let pistil_name = this._dragged_pistil
       //console.log('_mousemove move', evt.target.id)
       let mousePos = this._getMousePosition(evt)
       let displ = displacement(this._offset, mousePos)
@@ -209,19 +211,40 @@ export class HappUiExp extends LitElement {
       let new_length = this[pistil_name] + proj / sprout_length
       this[pistil_name] = new_length
       if (this[pistil_name] != new_length) {
-        this._dragged_pistil_name = undefined
+        this._dragged_pistil = undefined
       }
+      this._move_count += 1
     }
   }
 
   _mouseup(event) {
-    //console.log('_mouseup', event)
-    this._dragged_pistil_name = undefined
+    console.log('_mouseup', this._move_count)
+    this._dragged_pistil = undefined
+    if (this._move_count < 5) {
+      this._handleClick(event)
+    }
+    this._move_count = 0
   }
 
   _mouseleave(event) {
     //console.log('_mouseleave', event)
-    this._dragged_pistil_name = undefined
+    this._dragged_pistil = undefined
+  }
+
+  _handleClick(event) {
+    console.log(event.target.id)
+    const sprouts = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
+    let pistil_from_sprout = sprouts[event.target.id]
+    if (pistil_from_sprout) {
+      this[pistil_from_sprout] += this.__step
+      console.log('_handleClick', this[pistil_from_sprout])
+    }
+    const stems = {'p0:stem': 'sentir', 'p1:stem': 'connaitre', 'p2:stem': 'comprendre'}
+    let pistil_from_stem = stems[event.target.id]
+    if (pistil_from_stem) {
+      this[pistil_from_stem] -= this.__step
+      console.log('_handleClick', this[pistil_from_stem])
+    }
   }
 
   wheel1() {
