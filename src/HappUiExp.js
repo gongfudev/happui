@@ -174,7 +174,7 @@ export class HappUiExp extends LitElement {
   }
 
   firstUpdated(changedProperties) {
-    //console.table(happUiLogoDimensions(100))
+    console.table(happUiLogoDimensions(100))
   }
 
   _getMousePosition(evt) {
@@ -423,9 +423,7 @@ export class HappUiExp extends LitElement {
   }
 
   render() {
-    console.log(`variant= ${this.variant}`)
     const dims = happUiLogoDimensions(50)
-    console.table(dims)
     return html`<svg viewBox="0 0 100 100"
         aria-label="${this.title}"
         @mousedown="${this._mousedown}"
