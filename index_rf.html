@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+  <title>index_rf.html</title>
+  <meta charset="utf-8">
+  <style>
+    body { background: #fafafa; }
+    #happ-ui-variants { background: #46738d;}
+    #happ-ui-variants, #happuiexp { background: #fff;}
+    .hint {
+      color: black;
+      padding: 0.5em 1em;
+      font-size: 14px;
+      font-family: "Lucida Console", Monaco, monospace;
+    }
+    happ-ui-exp { width: 45%; height: 45%;
+      margin: 5%;  }
+    happ-ui { width: 45%; height: 45%; }
+    happ-ui-dragme { width: 45%; height: 45%; }
+    happ-contactsheet { width: 100%; height: 100%; }
+  </style>
+
+</head>
+
+<body>
+  <!-- experimental -->
+  <div id="happuiexp">
+    <p class="hint">select
+      <select class="hint" name="select-variant" id="select-variant">
+        <option value="wheel4">wheel4</option>
+        <option value="wheel3b">wheel3b</option>
+        <option value="wheel3a">wheel3a</option>
+        <option value="wheel2">wheel2</option>
+        <option value="wheel1">wheel1</option>
+      </select>       
+    </p>
+    <happ-ui-exp id="happuiwheel" variant="wheel4"></happ-ui-exp>
+
+    <script>
+      const happuiwheel = document.getElementById('happuiwheel');
+      document.getElementById('select-variant').addEventListener('change', (e) => {
+        happuiwheel.setAttribute('variant', e.target.value);
+      }); 
+    </script>
+  </div>
+
+  <!-- variants <happ-ui-dragme> <happ-ui> -->
+  <div id="happ-ui-variants">
+    <p class="hint">drag my circle</p>
+    <happ-ui-dragme></happ-ui-dragme>
+    <happ-ui></happ-ui>
+  </div>
+
+  <!-- contactsheet -->
+  <div id="happ-contactsheet">
+    <happ-contactsheet></happ-contactsheet>
+  </div>
+
+  <script type="module">
+    import { HappUi } from './src/HappUi.js';
+    window.customElements.define('happ-ui', HappUi);
+
+    import { HappUiExp } from './src/HappUiExp.js';
+    window.customElements.define('happ-ui-exp', HappUiExp);
+
+    import { HappUiDragme } from './src/HappUiDragme.js';
+    window.customElements.define('happ-ui-dragme', HappUiDragme);
+
+    import { HappContactsheet } from './src/HappContactsheet.js';
+    window.customElements.define('happ-contactsheet', HappContactsheet);
+  </script>
+</body>
+</html>

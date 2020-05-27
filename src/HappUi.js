@@ -33,9 +33,9 @@ export class HappUi extends LitElement {
     
     // Observed properties
     this.title = 'Color Wheel';
-    this._sentir = 0.75;
-    this._connaitre = 0.75;
-    this._comprendre = 0.75;
+    this._sentir = 0.65;
+    this._connaitre = 0.65;
+    this._comprendre = 0.65;
 
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
@@ -70,6 +70,8 @@ export class HappUi extends LitElement {
         .stem { stroke: white; stroke-width: 3.0; }
         .sprout { stroke: white; stroke-width: 3.0; fill-opacity: 0.0; }
 
+        .mix-mode { mix-blend-mode: color-dodge; }
+
         .stop1 { stop-color: #da00ff; stop-opacity: 15%; }
         .stop2 { stop-color: #0007d4; stop-opacity: 100%; }
 
@@ -78,8 +80,6 @@ export class HappUi extends LitElement {
 
         .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
         .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
-
-        .sliders { margin: auto; }
       </style>
       <defs>
         <linearGradient id="gradientSEN">
@@ -106,17 +106,17 @@ export class HappUi extends LitElement {
       <g id="background" mask="url(#circle)" filter="url(#blur)"> <!--   -->
         <rect x="0" y="0" width="100" height="100" fill="none" stroke="none" />
         <g id="backSEN" transform="translate(50 50) rotate(270 0 0)">
-          <circle id="backSEN:color" fill="url(#gradientSEN)"
+          <circle id="backSEN:color" fill="url(#gradientSEN)" class="mix-mode"
             cx="${30 - this._sentir * 5}" cy="0"
              r="${10 + this._sentir * 50}" />
         </g>
         <g id="backCON" transform="translate(50 50) rotate(30 0 0)">
-          <circle id="backCON:color" fill="url(#gradientCON)"
+          <circle id="backCON:color" fill="url(#gradientCON)" class="mix-mode"
             cx="${30 - this._connaitre * 5}" cy="0"
              r="${10 + this._connaitre * 50}" />
         </g>
         <g id="backCOM" transform="translate(50 50) rotate(150 0 0)">
-          <circle id="backCOM:color" fill="url(#gradientCOM)"
+          <circle id="backCOM:color" fill="url(#gradientCOM)" class="mix-mode"
             cx="${30 - this._comprendre * 5}" cy="0"
              r="${10 + this._comprendre * 50}" />
         </g>
@@ -135,27 +135,6 @@ export class HappUi extends LitElement {
           <circle id="branchCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>
-    <div class="sliders">
-      <happ-ui-slider label="SEN" value="${this._sentir}" @slider-change="${this.handleChangeSEN}"></happ-ui-slider>
-      <happ-ui-slider label="CON" value="${this._connaitre}" @slider-change="${this.handleChangeCON}"></happ-ui-slider>
-      <happ-ui-slider label="COM" value="${this._comprendre}" @slider-change="${this.handleChangeCOM}"></happ-ui-slider>
-    </div>`;
-  }
-
-  handleChangeSEN( e) {
-    const newValue = e.detail.value;
-    console.log( "changeSEN: " + newValue);
-    this.sentir = newValue;
-  }
-  handleChangeCON( e) {
-    const newValue = e.detail.value;
-    console.log( "changeCON: " + newValue);
-    this.connaitre = newValue;
-  }
-  handleChangeCOM( e) {
-    const newValue = e.detail.value;
-    console.log( "changeCOM: " + newValue);
-    this.comprendre = newValue;
+    </svg>`;
   }
 }
