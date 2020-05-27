@@ -1,14 +1,10 @@
 
 import { LitElement, html, css } from 'lit-element';
-//import { HappUi } from './HappUi.js'
-//import { HappUiDragme } from './HappUiDragme.js'
-import { HappUi } from '../happ-ui.js'
-import { HappUiDragme } from '../happ-ui-dragme.js'
 
 export class HappContactsheet extends LitElement {
 
-static get styles() {
-  return css`
+  static get styles() {
+    return css`
       :host {
         --happ-ui-text-color: #000;
 

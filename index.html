@@ -7,22 +7,13 @@
   <style>
     body { background: #fafafa; }
     happ-ui { width: 45%; height: 45%; }
-
-    #demo_rf {
-      color: black;
-      padding: 0.5em 1em;
-      font-size: 16px;
-      font-family: "Lucida Console", Monaco, monospace;
-    }
   </style>
 </head>
 
 <body>
-
-  <div id='demo_rf'>
-    <a href='./index_rf.html'>Demo Dragme and Contactsheet (RF)</a>
-    <p></p>
-  </div>
+  <p>
+    <a href="./index_rf.html">Demo Dragme and Contactsheet (RF)</a>
+  </p>
 
   <div id="demo">
     <happ-ui title="Color Wheel 1"
@@ -32,7 +23,14 @@
   </div>
 
   <script type="module">
-    import './happ-ui.js';
+    import { HappUi } from './src/HappUi.js';
+    window.customElements.define('happ-ui', HappUi);
+
+    import { Slider } from './src/HappUiSlider.js';
+    window.customElements.define('happ-ui-slider', Slider);
+
+    import { VariousComponents } from './src/VariousComponents.js';
+    window.customElements.define('various-components', VariousComponents);
   </script>
 
 </body>
