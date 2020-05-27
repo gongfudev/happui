@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "es-dev-server": "^1.53.0",
-    "@open-wc/demoing-storybook": "^3.0.1"
+    "@open-wc/demoing-storybook": "^2.3.4"
   }
 }

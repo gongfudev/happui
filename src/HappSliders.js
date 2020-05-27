@@ -58,11 +58,10 @@ export class HappSliders extends LitElement {
       connaitre: this.connaitre,
       comprendre: this.comprendre
     };
-    const myChangeEvent = new CustomEvent( "slider-change", { 
+    const myChangeEvent = new CustomEvent( "sliders-change", {
       detail: { changed: changed, value: newValue },
       bubbles: true, composed: true
     });
     this.dispatchEvent( myChangeEvent);
-
-  
+  }
 }
