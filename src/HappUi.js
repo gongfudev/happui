@@ -33,9 +33,9 @@ export class HappUi extends LitElement {
     
     // Observed properties
     this.title = 'Color Wheel';
-    this._sentir = 0.75;
-    this._connaitre = 0.75;
-    this._comprendre = 0.75;
+    this._sentir = 0.65;
+    this._connaitre = 0.65;
+    this._comprendre = 0.65;
 
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
@@ -136,18 +136,5 @@ export class HappUi extends LitElement {
         </g>
       </g>
     </svg>`;
-  }
-
-  handleChangeSEN( e) {
-    const newValue = e.detail.value;
-    this.sentir = newValue;
-  }
-  handleChangeCON( e) {
-    const newValue = e.detail.value;
-    this.connaitre = newValue;
-  }
-  handleChangeCOM( e) {
-    const newValue = e.detail.value;
-    this.comprendre = newValue;
   }
 }

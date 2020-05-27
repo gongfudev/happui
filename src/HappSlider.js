@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit-element';
 
 // Web Component definition
-export class Slider extends LitElement {
+export class HappSlider extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -26,7 +26,7 @@ export class Slider extends LitElement {
     super();
     
     // Observed properties
-    this.value = 0.5;
+    this.value = 0.65;
     this.label = "";
   }
 

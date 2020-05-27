@@ -20,17 +20,19 @@
              sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
     <happ-ui title="Color Wheel 2"
              sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-ui>
+    <happ-sliders
+              sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-sliders>
   </div>
 
   <script type="module">
     import { HappUi } from './src/HappUi.js';
     window.customElements.define('happ-ui', HappUi);
 
-    import { Slider } from './src/HappUiSlider.js';
-    window.customElements.define('happ-ui-slider', Slider);
+    import { HappSlider } from './src/HappSlider.js';
+    window.customElements.define('happ-slider', HappSlider);
 
-    import { VariousComponents } from './src/VariousComponents.js';
-    window.customElements.define('various-components', VariousComponents);
+    import { HappSliders } from './src/HappSliders.js';
+    window.customElements.define('happ-sliders', HappSliders);
   </script>
 
 </body>

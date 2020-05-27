@@ -2,7 +2,6 @@
 import { LitElement, html, css } from 'lit-element';
 
 export class HappContactsheet extends LitElement {
-
   static get styles() {
     return css`
       :host {
