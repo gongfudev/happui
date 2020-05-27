@@ -6,7 +6,14 @@
   <meta charset="utf-8">
   <style>
     body { background: #fafafa; }
-    happ-ui, happ-ui-exp { width: 45%; height: 45%; }
+    happ-ui,
+    happ-ui-exp01,
+    happ-ui-exp02,
+    happ-ui-exp03a,
+    happ-ui-exp03b,
+    happ-ui-exp04 {
+      width: 20%; height: 20%;
+    }
   </style>
 </head>
 
@@ -18,8 +25,17 @@
   <div id="demo">
     <happ-ui title="Color Wheel 1"
       sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui>
-    <happ-ui-exp title="Color Wheel 2" variant="wheel3b"
-      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp>
+    <happ-ui-exp01 title="Color Wheel Exp 01"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp01>
+    <happ-ui-exp02 title="Color Wheel Exp 02"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp02>
+    <happ-ui-exp03a title="Color Wheel Exp 03A"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp03a>
+    <happ-ui-exp03b title="Color Wheel Exp 03B"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp03b>
+    <happ-ui-exp04 title="Color Wheel Exp 04"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp04>
+
     <happ-sliders
       sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-sliders>
   </div>
@@ -28,8 +44,20 @@
     import { HappUi } from './src/HappUi.js';
     window.customElements.define('happ-ui', HappUi);
 
-    import { HappUiExp } from './src/HappUiExp.js';
-    window.customElements.define('happ-ui-exp', HappUiExp);
+    import { HappUiExp01 } from './src/HappUiExp01.js';
+    window.customElements.define('happ-ui-exp01', HappUiExp01);
+
+    import { HappUiExp02 } from './src/HappUiExp02.js';
+    window.customElements.define('happ-ui-exp02', HappUiExp02);
+
+    import { HappUiExp03A } from './src/HappUiExp03A.js';
+    window.customElements.define('happ-ui-exp03a', HappUiExp03A);
+
+    import { HappUiExp03B } from './src/HappUiExp03B.js';
+    window.customElements.define('happ-ui-exp03b', HappUiExp03B);
+
+    import { HappUiExp04 } from './src/HappUiExp04.js';
+    window.customElements.define('happ-ui-exp04', HappUiExp04);
 
     import { HappSlider } from './src/HappSlider.js';
     window.customElements.define('happ-slider', HappSlider);
@@ -41,7 +69,11 @@
     window.addEventListener( "DOMContentLoaded", function( e) {
       happUIElements = [
         ...document.querySelectorAll( "happ-ui"),
-        ...document.querySelectorAll( "happ-ui-exp")
+        ...document.querySelectorAll( "happ-ui-exp01"),
+        ...document.querySelectorAll( "happ-ui-exp02"),
+        ...document.querySelectorAll( "happ-ui-exp03a"),
+        ...document.querySelectorAll( "happ-ui-exp03b"),
+        ...document.querySelectorAll( "happ-ui-exp04")
       ];
     });
 

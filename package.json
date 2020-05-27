@@ -13,7 +13,7 @@
     "storybook:build": "build-storybook"
   },
   "dependencies": {
-    "lit-element": "^2.3.0"
+    "lit-element": "^2.3.1"
   },
   "devDependencies": {
     "es-dev-server": "^1.53.0",
