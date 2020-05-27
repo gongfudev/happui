@@ -36,23 +36,33 @@ export class HappSliders extends LitElement {
   handleChangeSEN( e) {
     const newValue = e.detail.value;
     this.sentir = newValue;
+    this.dispatchChange( e, "sentir");
   }
 
   handleChangeCON( e) {
     const newValue = e.detail.value;
     this.connaitre = newValue;
+    this.dispatchChange( e, "connaitre");
   }
 
   handleChangeCOM( e) {
     const newValue = e.detail.value;
     this.comprendre = newValue;
+    this.dispatchChange( e, "comprendre");
   }
 
-  dispatchChange( e) {
-
-    let myChangeEvent = new CustomEvent( "slider-change", { 
-      detail: { value: newValue }, bubbles: true, composed: true });
-    this.dispatchEvent(myChangeEvent);
+  dispatchChange( e, changed) {
+    e.stopPropagation();
+    const newValue = {
+      sentir: this.sentir,
+      connaitre: this.connaitre,
+      comprendre: this.comprendre
+    };
+    const myChangeEvent = new CustomEvent( "slider-change", { 
+      detail: { changed: changed, value: newValue },
+      bubbles: true, composed: true
+    });
+    this.dispatchEvent( myChangeEvent);
 
   
 }
