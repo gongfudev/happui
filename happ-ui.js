@@ -1,5 +1,5 @@
 import { HappUi } from './src/HappUi.js';
-export { HappUi};
+export { HappUi };
 
 import { Slider } from './src/HappUiSlider.js';
 
