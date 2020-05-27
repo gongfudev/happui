@@ -33,6 +33,14 @@
 
     import { HappSliders } from './src/HappSliders.js';
     window.customElements.define('happ-sliders', HappSliders);
+
+    window.addEventListener( "slider-change", handleSliderChange);
+
+    function handleSliderChange( e) {
+      const newValue = e.detail.value;
+      console.log( "Slider value: " + newValue);
+      console.log( e);
+    }
   </script>
 
 </body>
