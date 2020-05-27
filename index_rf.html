@@ -58,10 +58,17 @@
   </div>
 
   <script type="module">
-    import './happ-ui-exp.js';
-    import './happ-ui-dragme.js';
-    import './happ-ui.js';
-    import './happ-contactsheet.js';
+    import { HappUi } from './src/HappUi.js';
+    window.customElements.define('happ-ui', HappUi);
+
+    import { HappUiExp } from './src/HappUiExp.js';
+    window.customElements.define('happ-ui-exp', HappUiExp);
+
+    import { HappUiDragme } from './src/HappUiDragme.js';
+    window.customElements.define('happ-ui-dragme', HappUiDragme);
+
+    import { HappContactsheet } from './src/HappContactsheet.js';
+    window.customElements.define('happ-contactsheet', HappContactsheet);
   </script>
 </body>
 </html>

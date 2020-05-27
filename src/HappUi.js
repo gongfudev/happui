@@ -33,9 +33,9 @@ export class HappUi extends LitElement {
     
     // Observed properties
     this.title = 'Color Wheel';
-    this._sentir = 0.75;
-    this._connaitre = 0.75;
-    this._comprendre = 0.75;
+    this._sentir = 0.65;
+    this._connaitre = 0.65;
+    this._comprendre = 0.65;
 
     // Private properties
     this.__max = 0.90; // Maximum value of the properties { sentir, connaitre, comprendre }
@@ -80,8 +80,6 @@ export class HappUi extends LitElement {
 
         .stop5 { stop-color: #cd0000; stop-opacity: 15%; }
         .stop6 { stop-color: #ff9000; stop-opacity: 100%; }
-
-        .sliders { margin: auto; }
       </style>
       <defs>
         <linearGradient id="gradientSEN">
@@ -137,27 +135,6 @@ export class HappUi extends LitElement {
           <circle id="branchCOM:sprout" class="sprout" cx="${this._comprendre * 47}" cy="0" r="5" />
         </g>
       </g>
-    </svg>
-    <div class="sliders">
-      <happ-ui-slider label="SEN" value="${this._sentir}" @slider-change="${this.handleChangeSEN}"></happ-ui-slider>
-      <happ-ui-slider label="CON" value="${this._connaitre}" @slider-change="${this.handleChangeCON}"></happ-ui-slider>
-      <happ-ui-slider label="COM" value="${this._comprendre}" @slider-change="${this.handleChangeCOM}"></happ-ui-slider>
-    </div>`;
-  }
-
-  handleChangeSEN( e) {
-    const newValue = e.detail.value;
-    console.log( "changeSEN: " + newValue);
-    this.sentir = newValue;
-  }
-  handleChangeCON( e) {
-    const newValue = e.detail.value;
-    console.log( "changeCON: " + newValue);
-    this.connaitre = newValue;
-  }
-  handleChangeCOM( e) {
-    const newValue = e.detail.value;
-    console.log( "changeCOM: " + newValue);
-    this.comprendre = newValue;
+    </svg>`;
   }
 }

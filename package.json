@@ -13,11 +13,10 @@
     "storybook:build": "build-storybook"
   },
   "dependencies": {
-    "lit-html": "^1.1.2",
-    "lit-element": "^2.2.1"
+    "lit-element": "^2.3.0"
   },
   "devDependencies": {
-    "es-dev-server": "^1.23.0",
-    "@open-wc/demoing-storybook": "^1.0.1"
+    "es-dev-server": "^1.53.0",
+    "@open-wc/demoing-storybook": "^2.3.4"
   }
 }

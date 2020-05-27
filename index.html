@@ -6,33 +6,54 @@
   <meta charset="utf-8">
   <style>
     body { background: #fafafa; }
-    happ-ui { width: 45%; height: 45%; }
-
-    #demo_rf {
-      color: black;
-      padding: 0.5em 1em;
-      font-size: 16px;
-      font-family: "Lucida Console", Monaco, monospace;
-    }
+    happ-ui, happ-ui-exp { width: 45%; height: 45%; }
   </style>
 </head>
 
 <body>
-
-  <div id='demo_rf'>
-    <a href='./index_rf.html'>Demo Dragme and Contactsheet (RF)</a>
-    <p></p>
-  </div>
+  <p>
+    <a href="./index_rf.html">Demo Dragme and Contactsheet (RF)</a>
+  </p>
 
   <div id="demo">
     <happ-ui title="Color Wheel 1"
-             sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
-    <happ-ui title="Color Wheel 2"
-             sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-ui>
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui>
+    <happ-ui-exp title="Color Wheel 2" variant="wheel3b"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp>
+    <happ-sliders
+      sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-sliders>
   </div>
 
   <script type="module">
-    import './happ-ui.js';
+    import { HappUi } from './src/HappUi.js';
+    window.customElements.define('happ-ui', HappUi);
+
+    import { HappUiExp } from './src/HappUiExp.js';
+    window.customElements.define('happ-ui-exp', HappUiExp);
+
+    import { HappSlider } from './src/HappSlider.js';
+    window.customElements.define('happ-slider', HappSlider);
+
+    import { HappSliders } from './src/HappSliders.js';
+    window.customElements.define('happ-sliders', HappSliders);
+
+    let happUIElements;
+    window.addEventListener( "DOMContentLoaded", function( e) {
+      happUIElements = [
+        ...document.querySelectorAll( "happ-ui"),
+        ...document.querySelectorAll( "happ-ui-exp")
+      ];
+    });
+
+    window.addEventListener( "sliders-change", handleSlidersChange);
+    function handleSlidersChange( e) {
+      const { sentir, connaitre, comprendre } = e.detail.value;
+      happUIElements.forEach( function( elt) {
+        elt.sentir = sentir;
+        elt.connaitre = connaitre;
+        elt.comprendre = comprendre;
+      });
+    }
   </script>
 
 </body>
