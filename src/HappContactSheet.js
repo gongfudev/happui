@@ -1,7 +1,7 @@
 
 import { LitElement, html, css } from 'lit-element';
 
-export class HappContactsheet extends LitElement {
+export class HappContactSheet extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -14,7 +14,7 @@ export class HappContactsheet extends LitElement {
         background: #315163;
       }
 
-      happ-ui, happ-ui-dragme { width: 10%; height: 10%; }
+      happ-ui { width: 10%; height: 10%; }
 
       button {
         background-color: #0000;
@@ -31,19 +31,26 @@ export class HappContactsheet extends LitElement {
     `;
   }
 
+  static get properties() {
+    return {
+      variant: { type: String }
+    };
+  }
+
+  constructor() {
+    super();
+
+    // Observed properties
+    this.variant = "exp01";
+  }
+
   render() {
     function happui() {
       return html`<happ-ui sentir="${Math.random()}" comprendre="${Math.random()}" connaitre="${Math.random()}"></happ-ui>`
     }
-    function happuiDragme() {
-      return html`<happ-ui-dragme sentir="${Math.random()}" comprendre="${Math.random()}" connaitre="${Math.random()}"></happ-ui-dragme>`
-    }
     function happui8x5() {
       let htmlArr = []
       for (let i = 0; i < 5; ++i) {
-        htmlArr.push(html`<div>`)
-        for (let j = 0; j < 8; ++j) { htmlArr.push(happuiDragme()) }
-        htmlArr.push(html`</div>`)
         htmlArr.push(html`<div>`)
         for (let j = 0; j < 8; ++j) { htmlArr.push(happui()) }
         htmlArr.push(html`</div>`)
@@ -53,9 +60,8 @@ export class HappContactsheet extends LitElement {
     return html`
       <div>
         <button @click=${this._randomize}>randomize</button>
-        <p></p>
+        <p>Contact Sheet (variant ${this.variant})</p>
       </div>
-      ${happui8x5()}
     `;
   }
 
@@ -63,5 +69,3 @@ export class HappContactsheet extends LitElement {
     this.requestUpdate();
   }
 }
-
-//window.customElements.define('happ-contactsheet', HappContactsheet);

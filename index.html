@@ -6,7 +6,6 @@
   <meta charset="utf-8">
   <style>
     body { background: #fafafa; }
-    happ-ui,
     happ-ui-exp01,
     happ-ui-exp02,
     happ-ui-exp03a,
@@ -18,13 +17,7 @@
 </head>
 
 <body>
-  <p>
-    <a href="./index_rf.html">Demo Dragme and Contactsheet (RF)</a>
-  </p>
-
-  <div id="demo">
-    <happ-ui title="Color Wheel 1"
-      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui>
+  <div id="master">
     <happ-ui-exp01 title="Color Wheel Exp 01"
       sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp01>
     <happ-ui-exp02 title="Color Wheel Exp 02"
@@ -40,10 +33,20 @@
       sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-sliders>
   </div>
 
-  <script type="module">
-    import { HappUi } from './src/HappUi.js';
-    window.customElements.define('happ-ui', HappUi);
+  <div id="detail">
+      <select id="selectVariant">
+        <option value="exp04" >Exp04</option>
+        <option value="exp03B">Exp03B</option>
+        <option value="exp03A">Exp03A</option>
+        <option value="exp02" >Exp02</option>
+        <option value="exp01" >Exp01</option>
+      </select>
 
+    <happ-contact-sheet id="contactSheet">
+    </happ-contact-sheet>
+  </div>
+
+  <script type="module">
     import { HappUiExp01 } from './src/HappUiExp01.js';
     window.customElements.define('happ-ui-exp01', HappUiExp01);
 
@@ -65,16 +68,25 @@
     import { HappSliders } from './src/HappSliders.js';
     window.customElements.define('happ-sliders', HappSliders);
 
+    import { HappContactSheet } from './src/HappContactSheet.js';
+    window.customElements.define('happ-contact-sheet', HappContactSheet);
+    
     let happUIElements;
     window.addEventListener( "DOMContentLoaded", function( e) {
       happUIElements = [
-        ...document.querySelectorAll( "happ-ui"),
         ...document.querySelectorAll( "happ-ui-exp01"),
         ...document.querySelectorAll( "happ-ui-exp02"),
         ...document.querySelectorAll( "happ-ui-exp03a"),
         ...document.querySelectorAll( "happ-ui-exp03b"),
         ...document.querySelectorAll( "happ-ui-exp04")
       ];
+      
+      const contactSheetElt = document.getElementById( "contactSheet");
+      document.getElementById( "selectVariant").addEventListener( "change", (e) => {
+        const newVariant = e.target.value;
+        console.log( "new variant: " + newVariant);
+        contactSheetElt.setAttribute( "variant", newVariant);
+      });
     });
 
     window.addEventListener( "sliders-change", handleSlidersChange);
