@@ -8,10 +8,10 @@ requirements and concept (described at https://happui.org/app/).
 ## Current status
 
 ```html
-    <happ-ui title="Color Wheel 1"
-             sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
-    <happ-ui title="Color Wheel 2"
-             sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-ui>
+<happ-ui title="Color Wheel 1"
+         sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
+<happ-ui title="Color Wheel 2"
+         sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-ui>
 ```
 
 ![Two sample ‹happ-ui› web components](docs/happ-ui-components-sample.png)
@@ -23,35 +23,24 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Installation
 
 ```bash
-npm i happ-ui
+npm install happ-ui
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'happ-ui/happ-ui.js';
+    import { HappUiExp01 } from './src/HappUiExp01.js';
+    window.customElements.define('happ-ui-exp01', HappUiExp01);
+
+    import { HappUiExp02 } from './src/HappUiExp02.js';
+    window.customElements.define('happ-ui-exp02', HappUiExp02);
 </script>
 
-<happ-ui title="Color Wheel"
-         sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui>
-```
-
-## Usage variants
-
-```html
-<script type="module">
-  import 'happ-ui/happ-ui-dragme.js';
-</script>
-
-<happ-ui-dragme title="Color Wheel with Draggable Pistils"
-         sentir="0.75" comprendre="0.75" connaitre="0.75"></happ-ui-dragme>
-
-
-<div id="happ-contactsheet" title="Contact sheet with 8x5 happ-ui + happ-ui-dragme">
-  <happ-contactsheet></happ-contactsheet>
-</div>
-
+    <happ-ui-exp01 title="Color Wheel Exp 01"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp01>
+    <happ-ui-exp02 title="Color Wheel Exp 02"
+      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp02>
 ```
 
 ## Demoing with Storybook
@@ -67,7 +56,6 @@ To build a production version of Storybook, run
 ```bash
 npm run storybook:build
 ```
-
 
 ## Tooling configs
 
