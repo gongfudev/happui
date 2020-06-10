@@ -64,10 +64,6 @@ export class HappUiExp01 extends HappUiControls( LitElement) {
     this.requestUpdate( 'comprendre', oldVal);
   }
 
-  firstUpdated(changedProperties) {
-    console.table(this.happUiLogoDimensions(100))
-  }
-
   render() {
     const dims = this.happUiLogoDimensions(50)
     return html`<svg viewBox="0 0 100 100"

@@ -64,10 +64,6 @@ export class HappUiExp04 extends HappUiControls( LitElement) {
     this.requestUpdate( 'comprendre', oldVal);
   }
 
-  firstUpdated(changedProperties) {
-    console.table(this.happUiLogoDimensions(100))
-  }
-
   render() {
     const dims = this.happUiLogoDimensions(50)
     const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]

@@ -8,10 +8,10 @@ requirements and concept (described at https://happui.org/app/).
 ## Current status
 
 ```html
-<happ-ui title="Color Wheel 1"
-         sentir="0.75" connaitre="0.75" comprendre="0.75"></happ-ui>
-<happ-ui title="Color Wheel 2"
-         sentir="0.8" connaitre="0.45" comprendre="0.57"></happ-ui>
+<happ-ui-exp01 title="Color Wheel 1"
+  sentir="0.8" connaitre="0.8" comprendre="0.8"></happ-ui-exp01>
+<happ-ui-exp01 title="Color Wheel 2"
+  sentir="0.8" connaitre="0.5" comprendre="0.6"></happ-ui-exp01>
 ```
 
 ![Two sample ‹happ-ui› web components](docs/happ-ui-components-sample.png)
@@ -37,10 +37,10 @@ npm install happ-ui
     window.customElements.define('happ-ui-exp02', HappUiExp02);
 </script>
 
-    <happ-ui-exp01 title="Color Wheel Exp 01"
-      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp01>
-    <happ-ui-exp02 title="Color Wheel Exp 02"
-      sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp02>
+<happ-ui-exp01 title="Color Wheel Exp 01"
+  sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp01>
+<happ-ui-exp02 title="Color Wheel Exp 02"
+  sentir="0.65" connaitre="0.65" comprendre="0.65"></happ-ui-exp02>
 ```
 
 ## Demoing with Storybook
