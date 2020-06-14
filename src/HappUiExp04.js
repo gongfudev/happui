@@ -65,20 +65,12 @@ export class HappUiExp04 extends HappUiControls( LitElement) {
   }
 
   render() {
-    const dims = this.happUiLogoDimensions(50)
     const colorTriplet = [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
-    // find normalization factor
-    const colorTripletVector = this.colorWeightedMean([1,1,1], colorTriplet)
-    const colorTripletVectorMax = this.vectorMax(colorTripletVector)
-    const factor = 255 / colorTripletVectorMax
-    // compute current color
     const weights = [ this.sentir, this.connaitre, this.comprendre ]
-    const colorVector = this.colorWeightedMean(weights, colorTriplet)
-    const colorVectorNorm = this.vectorMult(colorVector, factor)
-    const fillColor = `rgb(${colorVectorNorm[0]},${colorVectorNorm[1]},${colorVectorNorm[2]})`
+    const color = this.weightedColor(weights, colorTriplet)
     // console.log(colorVector)
     // console.log(colorVectorNorm)
-    // console.log(fillColor)
+    // console.log("color:", color)
     const flowerScale = this.vectorMean(weights)
 
     return html`<svg viewBox="0 0 100 100"
@@ -96,7 +88,9 @@ export class HappUiExp04 extends HappUiControls( LitElement) {
       </style>
 
       <g  transform="translate(50, 50)">
-        <circle cx="0" cy="0" r="50" fill="${fillColor}" transform='rotate(0)' />
+        <circle cx="0" cy="0" r="50" 
+        fill="rgb(${color[0]},${color[1]},${color[2]})" 
+        transform='rotate(0)' />
       </g>
 
       <style>
