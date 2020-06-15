@@ -54,10 +54,11 @@ export function HappUiControls( superclass) {
       return val <= min ? min : val >= max ? max : val;
     }
 
-    // wheel4 matrix utilites
+    // Exp04 matrix utilites
 
-    MatrixProd( A, B) {
-      A.map((row, i) =>
+    matrixProd(A, B) {
+      //console.log("matrixProd A:", A, "B:", B)
+      return A.map((row, i) =>
         B[0].map((_, j) =>
           row.reduce((acc, _, n) =>
             acc + A[i][n] * B[n][j], 0
@@ -73,17 +74,6 @@ export function HappUiControls( superclass) {
       return total / n
     }
 
-    // return the vector normalized so that max element <= norm
-    vectorNorm(vector, norm) {
-      let max = vector.reduce((acc, item) => acc < item ? item : acc)
-      if (max > norm) {
-        let factor = norm / max
-        return vector.map((item) => item * factor)
-      } else {
-        return vector
-      }
-    }
-
     // return the max value of a vector of positive numbers
     vectorMax(vector) {
       return vector.reduce((acc, item) => acc < item ? item : acc)
@@ -94,15 +84,31 @@ export function HappUiControls( superclass) {
       return vector.map((item) => item * factor)
     }
 
-    // return the weighted mean color from colorTriplet
     colorWeightedMean(weights, colorTriplet) {
-      // weights: vecttor like [1, 1, 0]
-      // colorTriplet: matrix like [ [ 255, 255, 0 ], [ 0, 255, 0 ], [ 0, 0, 255 ] ]
-      // result: vector like [ 85, 170, 0 ]
-      // let matrixWeights = MatrixProd([[1/3]], [weights])
-      let matrixWeights = this.MatrixProd([[1.0]], [weights])
-      return this.MatrixProd(matrixWeights, colorTriplet)[0]
+      // weights: row vector like [1, 1, 0]
+      // colorTriplet: 2D matrix like [ [ 255, 255, 0 ], [ 0, 255, 0 ], [ 0, 0, 255 ] ]
+      // result: row vector like [ 85, 170, 0 ]
+      return this.matrixProd([weights], colorTriplet)[0]
     }
+
+    weightedColor(weights, colorTriplet) {
+      // param weights: row vector of numbers (0..1)
+      //   like [ 0.5, 0.6, 0.7 ]
+      // colorTriplet: 2D matrix of numbers (0...255)
+      //   like [ [ 255, 255, 0 ], [ 0, 255, 255 ], [ 255, 0, 255 ] ]
+      // colorVectorNorm: row vector of numbers (0...255)
+      //   like [56, 112, 56]
+      // 1. find normalization factor
+      const colorTripletVector = this.colorWeightedMean([1,1,1], colorTriplet)
+      const colorTripletVectorMax = this.vectorMax(colorTripletVector)
+      const factor = 255 / colorTripletVectorMax
+      // 2. compute weighted and normalized color vector
+      const colorVector = this.colorWeightedMean(weights, colorTriplet)
+      const colorVectorNorm = this.vectorMult(colorVector, factor)
+      return colorVectorNorm
+    }
+
+    // mouse drag utilities
 
     _getMousePosition(evt) {
       let svg = evt.currentTarget
@@ -114,7 +120,7 @@ export function HappUiControls( superclass) {
     }
 
     _mousedown(evt) {
-      console.log('_mousedown', evt.target.id)
+      //console.log('_mousedown', evt.target.id)
       let pistil_name = this._pistil_from_sprout[evt.target.id]
       if (pistil_name) {
         //console.log('_mousedown', evt.target.id)
@@ -143,7 +149,7 @@ export function HappUiControls( superclass) {
     }
 
     _mouseup(event) {
-      console.log('_mouseup', this._move_count)
+      //console.log('_mouseup', this._move_count)
       this._dragged_pistil = undefined
       if (this._move_count < 5) {
         this._handleClick(event)
@@ -157,18 +163,18 @@ export function HappUiControls( superclass) {
     }
 
     _handleClick(event) {
-      console.log(event.target.id)
+      //console.log(event.target.id)
       const sprouts = {'p0:sprout': 'sentir', 'p1:sprout': 'connaitre', 'p2:sprout': 'comprendre'}
       let pistil_from_sprout = sprouts[event.target.id]
       if (pistil_from_sprout) {
         this[pistil_from_sprout] += this.__step
-        console.log('_handleClick', this[pistil_from_sprout])
+        //console.log('_handleClick', this[pistil_from_sprout])
       }
       const stems = {'p0:stem': 'sentir', 'p1:stem': 'connaitre', 'p2:stem': 'comprendre'}
       let pistil_from_stem = stems[event.target.id]
       if (pistil_from_stem) {
         this[pistil_from_stem] -= this.__step
-        console.log('_handleClick', this[pistil_from_stem])
+        //console.log('_handleClick', this[pistil_from_stem])
       }
     }
   }
